@@ -1,0 +1,33 @@
+TURLEBOT DIRECTIONS
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+on local computer
+
+connect to network
+> robot -insertnamehere-
+
+For teleop
+roslaunch turtlebot_teleop keyboard_teleop.launch --screen
+
+For gazebo
+roslaunch turtlebot_gazebo turtlebot_world.launch
+
+For RVIZ
+roslaunch turtlebot_rviz_launchers view_robot.launch
+
+For simulations
+roslaunch turtlebot_gazebo gmapping_demo.launch
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+on turtlebot
+
+connect to network
+> roslaunch turtlebot_bringup minimal.launch
+
+For mapping
+roslaunch turtlebot_navigation gmapping_demo.launch
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Rviz instructions
+rosrun rviz rviz
+rosrun map_server map_server ./maps/lab3map.yaml
