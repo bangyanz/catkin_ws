@@ -48,11 +48,14 @@ if __name__ == '__main__':
 	
 	start = Point()
 	goal = Point()
-	start.x = 4
-	start.y = 14
-	goal.x = 34
-	goal.y = 34
+	start.x = 7
+	start.y = 1
+	start.z = 0
+	goal.x = 20
+	goal.y = 20
+	goal.z = 0
 
-	AStar.SearchForGoal(occupancyGrid, start, goal)
+	AStar.GetPath(occupancyGrid, start, goal)
+	#AStar.SearchForGoal(occupancyGrid, start, goal)
 
 	print "Lab 3 complete!"

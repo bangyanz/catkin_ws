@@ -10,6 +10,7 @@ from geometry_msgs.msg import Quaternion
 import time
 
 import Queue
+#from heapq import heappush, heappop
 
 #This is a library that can be called to perform specific AStar functions
 
@@ -28,6 +29,22 @@ import Queue
 #mapmetadata = gridMap.info
 #width = gridMap.info.width
 #height = gridMap.info.height
+
+
+# class PriorityQueue(Queue):
+#     # Initialize the queue representation
+#     def _init(self, maxsize):
+#         self.maxsize = maxsize
+#         self.queue = []
+
+#     # Put a new item in the queue
+#     def _put(self, item):
+#         return heappush(self.queue, item)
+
+#     # Get an item from the queue
+#     def _get(self):
+#         return heappop(self.queue)
+    
 
 def GetData (x, y, gridMap):
 	width = gridMap.info.width
@@ -61,25 +78,43 @@ def GetNeighbors (a, gridMap):
 
 
 def GetPath (gridMap, start, goal):
-	parents, costs = SearchForGoal(gridMap, start, goal)
-	path = Path()
-	path.poses = [PoseStamped()]
+	pathPublisher = rospy.Publisher('path', GridCells) 
+	#pa = []
+	#pa.append(Point(1, 1, 0))
+	#blankPath = MakeGridCellsFromList (pa)
+	#pathPublisher.publish(blankPath)
+	#time.sleep(1)
+
+	parents, costs, currentNode = SearchForGoal(gridMap, start, goal)
+	#path = Path()
+	#poseStampedList = []
+	#path.poses = [PoseStamped()]
 	currentIndex = 0
-	
-	currentNode = goal
+	pathList = []
 
 	while not IsSame(currentNode, start):
-		path.poses[currentIndex].pose.position = currentNode
+		#path.poses[currentIndex].pose.position = currentNode
+		pathList.append(currentNode)
 		currentNode = parents[currentNode]
 		currentIndex += 1
-	
-	path.poses[currentIndex].pose.position = start
-	return path
+
+	#path.poses[currentIndex].pose.position = start
+	pathList.append(start)
+
+	print pathList
+
+	publishablePath = MakeGridCellsFromList(pathList)
+	print "found path"
+	time.sleep(1)
+	pathPublisher.publish(publishablePath)
+	time.sleep(2)
+
+	#return path
 
 def MakeGridCellsFromList (cellList):
 	gridCells = GridCells()
-	gridCells.cell_width = .2
-	gridCells.cell_height = .2
+	gridCells.cell_width = 1
+	gridCells.cell_height = 1
 	gridCells.cells = cellList
 	gridCells.header.frame_id = 'map'
 	return gridCells
@@ -97,11 +132,11 @@ def SearchForGoal (gridMap, start, goal):
 	costs2[start] = 0
 	frontierList = [start]
 	visited = []
-	found = []
+	found = [start]
 
 	#The Frontier
 	frontier = Queue.PriorityQueue()
-	frontier.put((start, 0))
+	frontier.put((0, start))
 
 	#publishers
 	frontierPublisher = rospy.Publisher('frontier', GridCells) 
@@ -118,7 +153,7 @@ def SearchForGoal (gridMap, start, goal):
 		visitedPublisher.publish(publishableVisited)
 		
 		#get from frontier and update lists
-		currentNode = frontier.get()
+		p, currentNode = frontier.get()
 		print currentNode
 		frontierList.remove(currentNode)
 		visited.append(currentNode)
@@ -137,12 +172,19 @@ def SearchForGoal (gridMap, start, goal):
 				found.append(neighbor)
 
 				priority = costToNeighbor + GetHeuristic(neighbor, goal)
-				frontier.put((neighbor, priority))
+				frontier.put((priority, neighbor))
 				costs2[neighbor] = priority
 
 				if neighbor not in frontierList:
 					frontierList.append(neighbor)
 				parents[neighbor] = currentNode
 	
-	return parents, costs
+	print "parents"
+	for key in parents.keys():
+		print parents[key]
+	#print parents.keys()
+	#print "ITEMS"
+	#print parents.items()
+	print "parentsDONE"
+	return parents, costs, currentNode
 
