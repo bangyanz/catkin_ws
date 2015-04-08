@@ -1,4 +1,0 @@
-map -> occupancygrid
-map_metadata -> MapMetaData
-move_base_simple/goal -> PoseStamped
-initialpose -> PoseWithCovarianceStamped
