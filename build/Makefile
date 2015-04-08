@@ -578,6 +578,110 @@ std_msgs_generate_messages_py/fast:
 	$(MAKE) -f lab3/CMakeFiles/std_msgs_generate_messages_py.dir/build.make lab3/CMakeFiles/std_msgs_generate_messages_py.dir/build
 .PHONY : std_msgs_generate_messages_py/fast
 
+#=============================================================================
+# Target rules for targets named _lab32_generate_messages_check_deps_Pathsrv
+
+# Build rule for target.
+_lab32_generate_messages_check_deps_Pathsrv: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _lab32_generate_messages_check_deps_Pathsrv
+.PHONY : _lab32_generate_messages_check_deps_Pathsrv
+
+# fast build rule for target.
+_lab32_generate_messages_check_deps_Pathsrv/fast:
+	$(MAKE) -f lab32/CMakeFiles/_lab32_generate_messages_check_deps_Pathsrv.dir/build.make lab32/CMakeFiles/_lab32_generate_messages_check_deps_Pathsrv.dir/build
+.PHONY : _lab32_generate_messages_check_deps_Pathsrv/fast
+
+#=============================================================================
+# Target rules for targets named lab32_gencpp
+
+# Build rule for target.
+lab32_gencpp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 lab32_gencpp
+.PHONY : lab32_gencpp
+
+# fast build rule for target.
+lab32_gencpp/fast:
+	$(MAKE) -f lab32/CMakeFiles/lab32_gencpp.dir/build.make lab32/CMakeFiles/lab32_gencpp.dir/build
+.PHONY : lab32_gencpp/fast
+
+#=============================================================================
+# Target rules for targets named lab32_generate_messages
+
+# Build rule for target.
+lab32_generate_messages: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 lab32_generate_messages
+.PHONY : lab32_generate_messages
+
+# fast build rule for target.
+lab32_generate_messages/fast:
+	$(MAKE) -f lab32/CMakeFiles/lab32_generate_messages.dir/build.make lab32/CMakeFiles/lab32_generate_messages.dir/build
+.PHONY : lab32_generate_messages/fast
+
+#=============================================================================
+# Target rules for targets named lab32_generate_messages_cpp
+
+# Build rule for target.
+lab32_generate_messages_cpp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 lab32_generate_messages_cpp
+.PHONY : lab32_generate_messages_cpp
+
+# fast build rule for target.
+lab32_generate_messages_cpp/fast:
+	$(MAKE) -f lab32/CMakeFiles/lab32_generate_messages_cpp.dir/build.make lab32/CMakeFiles/lab32_generate_messages_cpp.dir/build
+.PHONY : lab32_generate_messages_cpp/fast
+
+#=============================================================================
+# Target rules for targets named lab32_generate_messages_lisp
+
+# Build rule for target.
+lab32_generate_messages_lisp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 lab32_generate_messages_lisp
+.PHONY : lab32_generate_messages_lisp
+
+# fast build rule for target.
+lab32_generate_messages_lisp/fast:
+	$(MAKE) -f lab32/CMakeFiles/lab32_generate_messages_lisp.dir/build.make lab32/CMakeFiles/lab32_generate_messages_lisp.dir/build
+.PHONY : lab32_generate_messages_lisp/fast
+
+#=============================================================================
+# Target rules for targets named lab32_generate_messages_py
+
+# Build rule for target.
+lab32_generate_messages_py: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 lab32_generate_messages_py
+.PHONY : lab32_generate_messages_py
+
+# fast build rule for target.
+lab32_generate_messages_py/fast:
+	$(MAKE) -f lab32/CMakeFiles/lab32_generate_messages_py.dir/build.make lab32/CMakeFiles/lab32_generate_messages_py.dir/build
+.PHONY : lab32_generate_messages_py/fast
+
+#=============================================================================
+# Target rules for targets named lab32_genlisp
+
+# Build rule for target.
+lab32_genlisp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 lab32_genlisp
+.PHONY : lab32_genlisp
+
+# fast build rule for target.
+lab32_genlisp/fast:
+	$(MAKE) -f lab32/CMakeFiles/lab32_genlisp.dir/build.make lab32/CMakeFiles/lab32_genlisp.dir/build
+.PHONY : lab32_genlisp/fast
+
+#=============================================================================
+# Target rules for targets named lab32_genpy
+
+# Build rule for target.
+lab32_genpy: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 lab32_genpy
+.PHONY : lab32_genpy
+
+# fast build rule for target.
+lab32_genpy/fast:
+	$(MAKE) -f lab32/CMakeFiles/lab32_genpy.dir/build.make lab32/CMakeFiles/lab32_genpy.dir/build
+.PHONY : lab32_genpy/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -624,6 +728,14 @@ help:
 	@echo "... std_msgs_generate_messages_cpp"
 	@echo "... std_msgs_generate_messages_lisp"
 	@echo "... std_msgs_generate_messages_py"
+	@echo "... _lab32_generate_messages_check_deps_Pathsrv"
+	@echo "... lab32_gencpp"
+	@echo "... lab32_generate_messages"
+	@echo "... lab32_generate_messages_cpp"
+	@echo "... lab32_generate_messages_lisp"
+	@echo "... lab32_generate_messages_py"
+	@echo "... lab32_genlisp"
+	@echo "... lab32_genpy"
 .PHONY : help
 
 

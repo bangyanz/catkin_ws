@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "lab32")
+set(lab32_MAINTAINER "jbmorse <jbmorse@todo.todo>")
+set(lab32_DEPRECATED "")
+set(lab32_VERSION "0.0.0")
+set(lab32_BUILD_DEPENDS "message_generation" "roscpp" "rospy" "std_msgs" "nav_msgs" "geometry_msgs")
+set(lab32_RUN_DEPENDS "message_runtime" "roscpp" "rospy" "std_msgs" "nav_msgs" "geometry_msgs")
+set(lab32_BUILDTOOL_DEPENDS "catkin")

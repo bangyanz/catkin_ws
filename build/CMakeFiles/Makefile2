@@ -645,12 +645,12 @@ clean: lab3/CMakeFiles/lab3_generate_messages.dir/clean
 
 # All Build rule for target.
 lab3/CMakeFiles/lab3_generate_messages_cpp.dir/all: lab3/CMakeFiles/_lab3_generate_messages_check_deps_Pathsrv.dir/all
+lab3/CMakeFiles/lab3_generate_messages_cpp.dir/all: lab3/CMakeFiles/nav_msgs_generate_messages_cpp.dir/all
 lab3/CMakeFiles/lab3_generate_messages_cpp.dir/all: lab3/CMakeFiles/std_msgs_generate_messages_cpp.dir/all
 lab3/CMakeFiles/lab3_generate_messages_cpp.dir/all: lab3/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/all
-lab3/CMakeFiles/lab3_generate_messages_cpp.dir/all: lab3/CMakeFiles/nav_msgs_generate_messages_cpp.dir/all
 	$(MAKE) -f lab3/CMakeFiles/lab3_generate_messages_cpp.dir/build.make lab3/CMakeFiles/lab3_generate_messages_cpp.dir/depend
 	$(MAKE) -f lab3/CMakeFiles/lab3_generate_messages_cpp.dir/build.make lab3/CMakeFiles/lab3_generate_messages_cpp.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jbmorse/catkin_ws/build/CMakeFiles  3
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jbmorse/catkin_ws/build/CMakeFiles  7
 	@echo "Built target lab3_generate_messages_cpp"
 .PHONY : lab3/CMakeFiles/lab3_generate_messages_cpp.dir/all
 
@@ -684,7 +684,7 @@ lab3/CMakeFiles/lab3_generate_messages_lisp.dir/all: lab3/CMakeFiles/geometry_ms
 lab3/CMakeFiles/lab3_generate_messages_lisp.dir/all: lab3/CMakeFiles/std_msgs_generate_messages_lisp.dir/all
 	$(MAKE) -f lab3/CMakeFiles/lab3_generate_messages_lisp.dir/build.make lab3/CMakeFiles/lab3_generate_messages_lisp.dir/depend
 	$(MAKE) -f lab3/CMakeFiles/lab3_generate_messages_lisp.dir/build.make lab3/CMakeFiles/lab3_generate_messages_lisp.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jbmorse/catkin_ws/build/CMakeFiles  4
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jbmorse/catkin_ws/build/CMakeFiles  8
 	@echo "Built target lab3_generate_messages_lisp"
 .PHONY : lab3/CMakeFiles/lab3_generate_messages_lisp.dir/all
 
@@ -713,12 +713,12 @@ clean: lab3/CMakeFiles/lab3_generate_messages_lisp.dir/clean
 
 # All Build rule for target.
 lab3/CMakeFiles/lab3_generate_messages_py.dir/all: lab3/CMakeFiles/_lab3_generate_messages_check_deps_Pathsrv.dir/all
-lab3/CMakeFiles/lab3_generate_messages_py.dir/all: lab3/CMakeFiles/geometry_msgs_generate_messages_py.dir/all
 lab3/CMakeFiles/lab3_generate_messages_py.dir/all: lab3/CMakeFiles/std_msgs_generate_messages_py.dir/all
+lab3/CMakeFiles/lab3_generate_messages_py.dir/all: lab3/CMakeFiles/geometry_msgs_generate_messages_py.dir/all
 lab3/CMakeFiles/lab3_generate_messages_py.dir/all: lab3/CMakeFiles/nav_msgs_generate_messages_py.dir/all
 	$(MAKE) -f lab3/CMakeFiles/lab3_generate_messages_py.dir/build.make lab3/CMakeFiles/lab3_generate_messages_py.dir/depend
 	$(MAKE) -f lab3/CMakeFiles/lab3_generate_messages_py.dir/build.make lab3/CMakeFiles/lab3_generate_messages_py.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jbmorse/catkin_ws/build/CMakeFiles  5 6
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jbmorse/catkin_ws/build/CMakeFiles  9 10
 	@echo "Built target lab3_generate_messages_py"
 .PHONY : lab3/CMakeFiles/lab3_generate_messages_py.dir/all
 
@@ -1190,6 +1190,291 @@ beginner_tutorials/clean:
 # Convenience name for "preinstall" pass in the directory.
 beginner_tutorials/preinstall:
 .PHONY : beginner_tutorials/preinstall
+
+#=============================================================================
+# Directory level rules for directory lab32
+
+# Convenience name for "all" pass in the directory.
+lab32/all: lab32/CMakeFiles/lab32_generate_messages.dir/all
+.PHONY : lab32/all
+
+# Convenience name for "clean" pass in the directory.
+lab32/clean: lab32/CMakeFiles/_lab32_generate_messages_check_deps_Pathsrv.dir/clean
+lab32/clean: lab32/CMakeFiles/lab32_gencpp.dir/clean
+lab32/clean: lab32/CMakeFiles/lab32_generate_messages.dir/clean
+lab32/clean: lab32/CMakeFiles/lab32_generate_messages_cpp.dir/clean
+lab32/clean: lab32/CMakeFiles/lab32_generate_messages_lisp.dir/clean
+lab32/clean: lab32/CMakeFiles/lab32_generate_messages_py.dir/clean
+lab32/clean: lab32/CMakeFiles/lab32_genlisp.dir/clean
+lab32/clean: lab32/CMakeFiles/lab32_genpy.dir/clean
+.PHONY : lab32/clean
+
+# Convenience name for "preinstall" pass in the directory.
+lab32/preinstall:
+.PHONY : lab32/preinstall
+
+#=============================================================================
+# Target rules for target lab32/CMakeFiles/_lab32_generate_messages_check_deps_Pathsrv.dir
+
+# All Build rule for target.
+lab32/CMakeFiles/_lab32_generate_messages_check_deps_Pathsrv.dir/all:
+	$(MAKE) -f lab32/CMakeFiles/_lab32_generate_messages_check_deps_Pathsrv.dir/build.make lab32/CMakeFiles/_lab32_generate_messages_check_deps_Pathsrv.dir/depend
+	$(MAKE) -f lab32/CMakeFiles/_lab32_generate_messages_check_deps_Pathsrv.dir/build.make lab32/CMakeFiles/_lab32_generate_messages_check_deps_Pathsrv.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jbmorse/catkin_ws/build/CMakeFiles 
+	@echo "Built target _lab32_generate_messages_check_deps_Pathsrv"
+.PHONY : lab32/CMakeFiles/_lab32_generate_messages_check_deps_Pathsrv.dir/all
+
+# Build rule for subdir invocation for target.
+lab32/CMakeFiles/_lab32_generate_messages_check_deps_Pathsrv.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jbmorse/catkin_ws/build/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 lab32/CMakeFiles/_lab32_generate_messages_check_deps_Pathsrv.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jbmorse/catkin_ws/build/CMakeFiles 0
+.PHONY : lab32/CMakeFiles/_lab32_generate_messages_check_deps_Pathsrv.dir/rule
+
+# Convenience name for target.
+_lab32_generate_messages_check_deps_Pathsrv: lab32/CMakeFiles/_lab32_generate_messages_check_deps_Pathsrv.dir/rule
+.PHONY : _lab32_generate_messages_check_deps_Pathsrv
+
+# clean rule for target.
+lab32/CMakeFiles/_lab32_generate_messages_check_deps_Pathsrv.dir/clean:
+	$(MAKE) -f lab32/CMakeFiles/_lab32_generate_messages_check_deps_Pathsrv.dir/build.make lab32/CMakeFiles/_lab32_generate_messages_check_deps_Pathsrv.dir/clean
+.PHONY : lab32/CMakeFiles/_lab32_generate_messages_check_deps_Pathsrv.dir/clean
+
+# clean rule for target.
+clean: lab32/CMakeFiles/_lab32_generate_messages_check_deps_Pathsrv.dir/clean
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target lab32/CMakeFiles/lab32_gencpp.dir
+
+# All Build rule for target.
+lab32/CMakeFiles/lab32_gencpp.dir/all: lab32/CMakeFiles/lab32_generate_messages_cpp.dir/all
+	$(MAKE) -f lab32/CMakeFiles/lab32_gencpp.dir/build.make lab32/CMakeFiles/lab32_gencpp.dir/depend
+	$(MAKE) -f lab32/CMakeFiles/lab32_gencpp.dir/build.make lab32/CMakeFiles/lab32_gencpp.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jbmorse/catkin_ws/build/CMakeFiles 
+	@echo "Built target lab32_gencpp"
+.PHONY : lab32/CMakeFiles/lab32_gencpp.dir/all
+
+# Build rule for subdir invocation for target.
+lab32/CMakeFiles/lab32_gencpp.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jbmorse/catkin_ws/build/CMakeFiles 1
+	$(MAKE) -f CMakeFiles/Makefile2 lab32/CMakeFiles/lab32_gencpp.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jbmorse/catkin_ws/build/CMakeFiles 0
+.PHONY : lab32/CMakeFiles/lab32_gencpp.dir/rule
+
+# Convenience name for target.
+lab32_gencpp: lab32/CMakeFiles/lab32_gencpp.dir/rule
+.PHONY : lab32_gencpp
+
+# clean rule for target.
+lab32/CMakeFiles/lab32_gencpp.dir/clean:
+	$(MAKE) -f lab32/CMakeFiles/lab32_gencpp.dir/build.make lab32/CMakeFiles/lab32_gencpp.dir/clean
+.PHONY : lab32/CMakeFiles/lab32_gencpp.dir/clean
+
+# clean rule for target.
+clean: lab32/CMakeFiles/lab32_gencpp.dir/clean
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target lab32/CMakeFiles/lab32_generate_messages.dir
+
+# All Build rule for target.
+lab32/CMakeFiles/lab32_generate_messages.dir/all: lab32/CMakeFiles/lab32_generate_messages_py.dir/all
+lab32/CMakeFiles/lab32_generate_messages.dir/all: lab32/CMakeFiles/lab32_generate_messages_lisp.dir/all
+lab32/CMakeFiles/lab32_generate_messages.dir/all: lab32/CMakeFiles/lab32_generate_messages_cpp.dir/all
+	$(MAKE) -f lab32/CMakeFiles/lab32_generate_messages.dir/build.make lab32/CMakeFiles/lab32_generate_messages.dir/depend
+	$(MAKE) -f lab32/CMakeFiles/lab32_generate_messages.dir/build.make lab32/CMakeFiles/lab32_generate_messages.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jbmorse/catkin_ws/build/CMakeFiles 
+	@echo "Built target lab32_generate_messages"
+.PHONY : lab32/CMakeFiles/lab32_generate_messages.dir/all
+
+# Include target in all.
+all: lab32/CMakeFiles/lab32_generate_messages.dir/all
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+lab32/CMakeFiles/lab32_generate_messages.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jbmorse/catkin_ws/build/CMakeFiles 4
+	$(MAKE) -f CMakeFiles/Makefile2 lab32/CMakeFiles/lab32_generate_messages.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jbmorse/catkin_ws/build/CMakeFiles 0
+.PHONY : lab32/CMakeFiles/lab32_generate_messages.dir/rule
+
+# Convenience name for target.
+lab32_generate_messages: lab32/CMakeFiles/lab32_generate_messages.dir/rule
+.PHONY : lab32_generate_messages
+
+# clean rule for target.
+lab32/CMakeFiles/lab32_generate_messages.dir/clean:
+	$(MAKE) -f lab32/CMakeFiles/lab32_generate_messages.dir/build.make lab32/CMakeFiles/lab32_generate_messages.dir/clean
+.PHONY : lab32/CMakeFiles/lab32_generate_messages.dir/clean
+
+# clean rule for target.
+clean: lab32/CMakeFiles/lab32_generate_messages.dir/clean
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target lab32/CMakeFiles/lab32_generate_messages_cpp.dir
+
+# All Build rule for target.
+lab32/CMakeFiles/lab32_generate_messages_cpp.dir/all: lab3/CMakeFiles/nav_msgs_generate_messages_cpp.dir/all
+lab32/CMakeFiles/lab32_generate_messages_cpp.dir/all: lab3/CMakeFiles/std_msgs_generate_messages_cpp.dir/all
+lab32/CMakeFiles/lab32_generate_messages_cpp.dir/all: lab3/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/all
+lab32/CMakeFiles/lab32_generate_messages_cpp.dir/all: lab32/CMakeFiles/_lab32_generate_messages_check_deps_Pathsrv.dir/all
+	$(MAKE) -f lab32/CMakeFiles/lab32_generate_messages_cpp.dir/build.make lab32/CMakeFiles/lab32_generate_messages_cpp.dir/depend
+	$(MAKE) -f lab32/CMakeFiles/lab32_generate_messages_cpp.dir/build.make lab32/CMakeFiles/lab32_generate_messages_cpp.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jbmorse/catkin_ws/build/CMakeFiles  3
+	@echo "Built target lab32_generate_messages_cpp"
+.PHONY : lab32/CMakeFiles/lab32_generate_messages_cpp.dir/all
+
+# Build rule for subdir invocation for target.
+lab32/CMakeFiles/lab32_generate_messages_cpp.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jbmorse/catkin_ws/build/CMakeFiles 1
+	$(MAKE) -f CMakeFiles/Makefile2 lab32/CMakeFiles/lab32_generate_messages_cpp.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jbmorse/catkin_ws/build/CMakeFiles 0
+.PHONY : lab32/CMakeFiles/lab32_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+lab32_generate_messages_cpp: lab32/CMakeFiles/lab32_generate_messages_cpp.dir/rule
+.PHONY : lab32_generate_messages_cpp
+
+# clean rule for target.
+lab32/CMakeFiles/lab32_generate_messages_cpp.dir/clean:
+	$(MAKE) -f lab32/CMakeFiles/lab32_generate_messages_cpp.dir/build.make lab32/CMakeFiles/lab32_generate_messages_cpp.dir/clean
+.PHONY : lab32/CMakeFiles/lab32_generate_messages_cpp.dir/clean
+
+# clean rule for target.
+clean: lab32/CMakeFiles/lab32_generate_messages_cpp.dir/clean
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target lab32/CMakeFiles/lab32_generate_messages_lisp.dir
+
+# All Build rule for target.
+lab32/CMakeFiles/lab32_generate_messages_lisp.dir/all: lab3/CMakeFiles/nav_msgs_generate_messages_lisp.dir/all
+lab32/CMakeFiles/lab32_generate_messages_lisp.dir/all: lab3/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/all
+lab32/CMakeFiles/lab32_generate_messages_lisp.dir/all: lab3/CMakeFiles/std_msgs_generate_messages_lisp.dir/all
+lab32/CMakeFiles/lab32_generate_messages_lisp.dir/all: lab32/CMakeFiles/_lab32_generate_messages_check_deps_Pathsrv.dir/all
+	$(MAKE) -f lab32/CMakeFiles/lab32_generate_messages_lisp.dir/build.make lab32/CMakeFiles/lab32_generate_messages_lisp.dir/depend
+	$(MAKE) -f lab32/CMakeFiles/lab32_generate_messages_lisp.dir/build.make lab32/CMakeFiles/lab32_generate_messages_lisp.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jbmorse/catkin_ws/build/CMakeFiles  4
+	@echo "Built target lab32_generate_messages_lisp"
+.PHONY : lab32/CMakeFiles/lab32_generate_messages_lisp.dir/all
+
+# Build rule for subdir invocation for target.
+lab32/CMakeFiles/lab32_generate_messages_lisp.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jbmorse/catkin_ws/build/CMakeFiles 1
+	$(MAKE) -f CMakeFiles/Makefile2 lab32/CMakeFiles/lab32_generate_messages_lisp.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jbmorse/catkin_ws/build/CMakeFiles 0
+.PHONY : lab32/CMakeFiles/lab32_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+lab32_generate_messages_lisp: lab32/CMakeFiles/lab32_generate_messages_lisp.dir/rule
+.PHONY : lab32_generate_messages_lisp
+
+# clean rule for target.
+lab32/CMakeFiles/lab32_generate_messages_lisp.dir/clean:
+	$(MAKE) -f lab32/CMakeFiles/lab32_generate_messages_lisp.dir/build.make lab32/CMakeFiles/lab32_generate_messages_lisp.dir/clean
+.PHONY : lab32/CMakeFiles/lab32_generate_messages_lisp.dir/clean
+
+# clean rule for target.
+clean: lab32/CMakeFiles/lab32_generate_messages_lisp.dir/clean
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target lab32/CMakeFiles/lab32_generate_messages_py.dir
+
+# All Build rule for target.
+lab32/CMakeFiles/lab32_generate_messages_py.dir/all: lab3/CMakeFiles/std_msgs_generate_messages_py.dir/all
+lab32/CMakeFiles/lab32_generate_messages_py.dir/all: lab3/CMakeFiles/geometry_msgs_generate_messages_py.dir/all
+lab32/CMakeFiles/lab32_generate_messages_py.dir/all: lab3/CMakeFiles/nav_msgs_generate_messages_py.dir/all
+lab32/CMakeFiles/lab32_generate_messages_py.dir/all: lab32/CMakeFiles/_lab32_generate_messages_check_deps_Pathsrv.dir/all
+	$(MAKE) -f lab32/CMakeFiles/lab32_generate_messages_py.dir/build.make lab32/CMakeFiles/lab32_generate_messages_py.dir/depend
+	$(MAKE) -f lab32/CMakeFiles/lab32_generate_messages_py.dir/build.make lab32/CMakeFiles/lab32_generate_messages_py.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jbmorse/catkin_ws/build/CMakeFiles  5 6
+	@echo "Built target lab32_generate_messages_py"
+.PHONY : lab32/CMakeFiles/lab32_generate_messages_py.dir/all
+
+# Build rule for subdir invocation for target.
+lab32/CMakeFiles/lab32_generate_messages_py.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jbmorse/catkin_ws/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 lab32/CMakeFiles/lab32_generate_messages_py.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jbmorse/catkin_ws/build/CMakeFiles 0
+.PHONY : lab32/CMakeFiles/lab32_generate_messages_py.dir/rule
+
+# Convenience name for target.
+lab32_generate_messages_py: lab32/CMakeFiles/lab32_generate_messages_py.dir/rule
+.PHONY : lab32_generate_messages_py
+
+# clean rule for target.
+lab32/CMakeFiles/lab32_generate_messages_py.dir/clean:
+	$(MAKE) -f lab32/CMakeFiles/lab32_generate_messages_py.dir/build.make lab32/CMakeFiles/lab32_generate_messages_py.dir/clean
+.PHONY : lab32/CMakeFiles/lab32_generate_messages_py.dir/clean
+
+# clean rule for target.
+clean: lab32/CMakeFiles/lab32_generate_messages_py.dir/clean
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target lab32/CMakeFiles/lab32_genlisp.dir
+
+# All Build rule for target.
+lab32/CMakeFiles/lab32_genlisp.dir/all: lab32/CMakeFiles/lab32_generate_messages_lisp.dir/all
+	$(MAKE) -f lab32/CMakeFiles/lab32_genlisp.dir/build.make lab32/CMakeFiles/lab32_genlisp.dir/depend
+	$(MAKE) -f lab32/CMakeFiles/lab32_genlisp.dir/build.make lab32/CMakeFiles/lab32_genlisp.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jbmorse/catkin_ws/build/CMakeFiles 
+	@echo "Built target lab32_genlisp"
+.PHONY : lab32/CMakeFiles/lab32_genlisp.dir/all
+
+# Build rule for subdir invocation for target.
+lab32/CMakeFiles/lab32_genlisp.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jbmorse/catkin_ws/build/CMakeFiles 1
+	$(MAKE) -f CMakeFiles/Makefile2 lab32/CMakeFiles/lab32_genlisp.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jbmorse/catkin_ws/build/CMakeFiles 0
+.PHONY : lab32/CMakeFiles/lab32_genlisp.dir/rule
+
+# Convenience name for target.
+lab32_genlisp: lab32/CMakeFiles/lab32_genlisp.dir/rule
+.PHONY : lab32_genlisp
+
+# clean rule for target.
+lab32/CMakeFiles/lab32_genlisp.dir/clean:
+	$(MAKE) -f lab32/CMakeFiles/lab32_genlisp.dir/build.make lab32/CMakeFiles/lab32_genlisp.dir/clean
+.PHONY : lab32/CMakeFiles/lab32_genlisp.dir/clean
+
+# clean rule for target.
+clean: lab32/CMakeFiles/lab32_genlisp.dir/clean
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target lab32/CMakeFiles/lab32_genpy.dir
+
+# All Build rule for target.
+lab32/CMakeFiles/lab32_genpy.dir/all: lab32/CMakeFiles/lab32_generate_messages_py.dir/all
+	$(MAKE) -f lab32/CMakeFiles/lab32_genpy.dir/build.make lab32/CMakeFiles/lab32_genpy.dir/depend
+	$(MAKE) -f lab32/CMakeFiles/lab32_genpy.dir/build.make lab32/CMakeFiles/lab32_genpy.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jbmorse/catkin_ws/build/CMakeFiles 
+	@echo "Built target lab32_genpy"
+.PHONY : lab32/CMakeFiles/lab32_genpy.dir/all
+
+# Build rule for subdir invocation for target.
+lab32/CMakeFiles/lab32_genpy.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jbmorse/catkin_ws/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 lab32/CMakeFiles/lab32_genpy.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jbmorse/catkin_ws/build/CMakeFiles 0
+.PHONY : lab32/CMakeFiles/lab32_genpy.dir/rule
+
+# Convenience name for target.
+lab32_genpy: lab32/CMakeFiles/lab32_genpy.dir/rule
+.PHONY : lab32_genpy
+
+# clean rule for target.
+lab32/CMakeFiles/lab32_genpy.dir/clean:
+	$(MAKE) -f lab32/CMakeFiles/lab32_genpy.dir/build.make lab32/CMakeFiles/lab32_genpy.dir/clean
+.PHONY : lab32/CMakeFiles/lab32_genpy.dir/clean
+
+# clean rule for target.
+clean: lab32/CMakeFiles/lab32_genpy.dir/clean
+.PHONY : clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

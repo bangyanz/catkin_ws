@@ -1,0 +1,8 @@
+prefix=/home/jbmorse/catkin_ws/devel
+
+Name: lab32
+Description: Description of lab32
+Version: 0.0.0
+Cflags: -I/home/jbmorse/catkin_ws/devel/include
+Libs: -L/home/jbmorse/catkin_ws/devel/lib 
+Requires: roscpp rospy std_msgs nav_msgs geometry_msgs message_runtime

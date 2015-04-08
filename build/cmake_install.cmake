@@ -129,6 +129,7 @@ IF(NOT CMAKE_INSTALL_LOCAL_ONLY)
   INCLUDE("/home/jbmorse/catkin_ws/build/jbmorse_lab3/cmake_install.cmake")
   INCLUDE("/home/jbmorse/catkin_ws/build/lab3/cmake_install.cmake")
   INCLUDE("/home/jbmorse/catkin_ws/build/beginner_tutorials/cmake_install.cmake")
+  INCLUDE("/home/jbmorse/catkin_ws/build/lab32/cmake_install.cmake")
 
 ENDIF(NOT CMAKE_INSTALL_LOCAL_ONLY)
 

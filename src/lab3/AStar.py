@@ -4,7 +4,8 @@ import rospy, tf
 
 #from srv import Pathsrv
 #import Pathsrv
-from lab3 import Pathsrv
+#from lab3.srv import Pathsrv
+import lab3.srv
 #from lab3.srv import Pathsrv
 
 from nav_msgs.msg import GridCells
