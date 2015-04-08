@@ -28,6 +28,23 @@ roslaunch turtlebot_navigation gmapping_demo.launch
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Rviz instructions
+Rviz instructions for lab 3
+
+In Terminal 1:
+roscore
+
+In Terminal 2:
 rosrun rviz rviz
+
+in Terminal 3:
+cd catkin_ws
 rosrun map_server map_server ./maps/lab3map.yaml
+
+in Terminal 4:
+cd catkin_ws
+cd jbmorse_lab3
+python lab3.py
+
+In Rviz:
+set waypoint goal
+repeat

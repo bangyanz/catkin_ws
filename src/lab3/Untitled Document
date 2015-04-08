@@ -1,0 +1,14 @@
+
+def MakeGridCellsFromQueue (queue):
+	gridCells = GridCells()
+	gridCells.cell_width = 1
+	gridCells.cell_height = 1
+	gridCells.cells = [Point()]
+	i = 0
+	print "wat"
+	while not queue.empty():
+		print "am I stuck here"
+		gridCells.cells[i] = queue.get()
+		i += 1
+	print "okay"
+	return gridCells

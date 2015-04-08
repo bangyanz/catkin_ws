@@ -1,0 +1,8 @@
+prefix=/home/jbmorse/catkin_ws/install
+
+Name: lab3
+Description: Description of lab3
+Version: 0.0.0
+Cflags: -I/home/jbmorse/catkin_ws/install/include
+Libs: -L/home/jbmorse/catkin_ws/install/lib 
+Requires: message_runtime

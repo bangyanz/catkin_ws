@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "lab3")
+set(lab3_MAINTAINER "jbmorse <jbmorse@todo.todo>")
+set(lab3_DEPRECATED "")
+set(lab3_VERSION "0.0.0")
+set(lab3_BUILD_DEPENDS "message_generation")
+set(lab3_RUN_DEPENDS "message_runtime")
+set(lab3_BUILDTOOL_DEPENDS "catkin")

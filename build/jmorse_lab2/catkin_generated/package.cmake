@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "jmorse_lab2")
+set(jmorse_lab2_MAINTAINER "jbmorse <jbmorse@wpi.edu>")
+set(jmorse_lab2_DEPRECATED "")
+set(jmorse_lab2_VERSION "0.0.0")
+set(jmorse_lab2_BUILD_DEPENDS )
+set(jmorse_lab2_RUN_DEPENDS )
+set(jmorse_lab2_BUILDTOOL_DEPENDS "catkin")

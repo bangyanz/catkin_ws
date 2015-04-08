@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "jbmorse_lab3")
+set(jbmorse_lab3_MAINTAINER "jbmorse <jbmorse@wpi.edu>")
+set(jbmorse_lab3_DEPRECATED "")
+set(jbmorse_lab3_VERSION "0.0.0")
+set(jbmorse_lab3_BUILD_DEPENDS "message_generation")
+set(jbmorse_lab3_RUN_DEPENDS "message_runtime")
+set(jbmorse_lab3_BUILDTOOL_DEPENDS "catkin")

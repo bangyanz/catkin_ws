@@ -1,0 +1,8 @@
+prefix=/home/jbmorse/catkin_ws/devel
+
+Name: jbmorse_lab3
+Description: Description of jbmorse_lab3
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/jbmorse/catkin_ws/devel/lib 
+Requires: 

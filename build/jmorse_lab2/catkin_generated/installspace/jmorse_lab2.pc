@@ -1,0 +1,8 @@
+prefix=/home/jbmorse/catkin_ws/install
+
+Name: jmorse_lab2
+Description: Description of jmorse_lab2
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/jbmorse/catkin_ws/install/lib 
+Requires: 
