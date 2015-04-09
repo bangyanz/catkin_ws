@@ -80,7 +80,7 @@ def GetPath (gridMap, start, goal):
 
 	parents, costs, currentNode = SearchForGoal(gridMap, start, goal)
 	path = Path()
-	#poseStampedList = []
+	poseStampedList = []
 	#path.poses = [PoseStamped()]
 	currentIndex = 0
 	pathList = []
@@ -100,7 +100,7 @@ def GetPath (gridMap, start, goal):
 	print "found path"
 	pathPublisher.publish(publishablePath)
 
-	return path
+	return pathList
 
 def MakeGridCellsFromList (cellList):
 	gridCells = GridCells()
