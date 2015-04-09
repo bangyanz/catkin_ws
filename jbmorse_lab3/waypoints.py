@@ -8,27 +8,29 @@ from geometry_msgs.msg import Point
 
 import AStar
 
-def Waypoints (path):
+def Waypoints (pointlist):
 
-	waypointpub = rospy.Publisher('Waypoint_Cells', GridCells)
-	WaypointCells = GridCells()
-	WaypointCells.cell_width = 1
-	WaypointCells.cell_height = 1
-	WaypointCells.cells = [Point()]
-	WaypointCells.header.frame_id = 'map'
+	#waypointpub = rospy.Publisher('Waypoint_Cells', GridCells)
+	#WaypointCells = GridCells()
+	#WaypointCells.cell_width = 1
+	#WaypointCells.cell_height = 1
+	#WaypointCells.cells = [Point()]
+	#WaypointCells.header.frame_id = 'map'
 
 	i = 0
-	poseList = path.PoseStamped
-	print poseList
-	#poseList = poses.pose
-	#pose = poseList.pop(i)
+	PointList = pointlist
+	print PointList
 
-	#for item in PoseList:
-	#	current_x = item.pose.position.x
-	#	current_y = item.pose.position.y
-	#	next_pose = poseLise.pop(i+1)
-	#	next_x = next_pose.pose.position.x
-	#	next_y = next_pose.pose.position.y
+	for item in PointList:
+		current_x = item.x
+		current_y = item.y
+		next_point = pointList[i+1]
+		next_x = next_point.x
+		next_y = next_point.y
+		print "current x", current_x
+		print "current y", current_y
+		print "next x", next_x
+		print "next Y", next_y
 
 	#	if (next_x - current_x != 0):
 	#		WaypointCells.cells[0].x = current_x
@@ -48,7 +50,10 @@ if __name__ == '__main__':
 	rospy.init_node('megagnon_Lab_3_Waypoint_node')
 
 	rospy.Subscriber('path', GridCells, Waypoints)
+
+	test = [(0,0,0), (1,1,1), (2,2,2,) (3,3,3) (2,3,2)]
+
 	print "starting Waypoints"
-	Waypoints(AStar)
+	Waypoints(test)
 	print "end Waypoints"
 
