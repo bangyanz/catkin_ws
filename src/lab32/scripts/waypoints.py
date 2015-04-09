@@ -18,7 +18,7 @@ def MakeGridCellsFromList (cellList):
 	gridCells.header.frame_id = 'map'
 	return gridCells
 
-def Waypoints (pointlist):
+def Waypoints (pointList):
 
 	print "waypoints!"
 
@@ -26,62 +26,59 @@ def Waypoints (pointlist):
 	WaypointCells = [Point()]
 
 	i = 0
-	PointList = pointlist
-	print PointList
-	current_state = 0
+	current_state = 2
 
-	for item in PointList:
-		current_x = item[0]
-		current_y = item[1]
-		print "current x", current_x
-		print "current y", current_y
-		if (i < len(PointList)-1):
-			next_point = PointList[i+1]
-			next_x = next_point[0]
-			next_y = next_point[1]
-			print "next x", next_x
-			print "next Y", next_y
+	WaypointCells.append(pointList[0])
+
+	for item in pointList:
+		current_point = item
+		if (i < len(pointList)-1):
+			next_point = pointList[i+1]
 			i += 1
 
-
-		
-		#if the x coordinate is changing and the y coordinate is staying the same
-		if ((not(next_x - current_x == 0)) and (next_y - current_y == 0)):
-			print "I hope I'm going left/right"
-			if (current_state == 1):
-				WaypointCells.append(Point(current_x, current_y, 0))
-				print "publish"
-				publishableWaypoints = MakeGridCellsFromList(WaypointCells)
-				waypointpub.publish(publishableWaypoints)
-				time.sleep(.2)
+			#if the x coordinate is changing and the y coordinate is staying the same
+			if ((not(next_point.x - current_point.x == 0)) and (next_point.y - current_point.y == 0)):
+				print "I hope I'm going left/right"
+				if (current_state == 1):
+					WaypointCells.append(current_point)
+					publishableWaypoints = MakeGridCellsFromList(WaypointCells)
+					waypointpub.publish(publishableWaypoints)
+					time.sleep(.2)
 
 				current_state = 0	
-			
-		#if the x coordinate is staying the same and the y coordinate is changing
-		elif ((next_x - current_x == 0) and (not(next_y - current_y == 0))):
-			print "I hope I'm going up/down"
-			if (current_state == 0):
-				WaypointCells.append(Point(current_x, current_y, 0))
-				print "publish2"
-				publishableWaypoints = MakeGridCellsFromList(WaypointCells)
-				waypointpub.publish(publishableWaypoints)
-				time.sleep(.2)
+				
+			#if the x coordinate is staying the same and the y coordinate is changing
+			elif ((next_point.x - current_point.x == 0) and (not(next_point.y - current_point.y == 0))):
+				print "I hope I'm going up/down"
+				if (current_state == 0):
+					WaypointCells.append(current_point)
+					publishableWaypoints = MakeGridCellsFromList(WaypointCells)
+					waypointpub.publish(publishableWaypoints)
+					time.sleep(.2)
 				current_state = 1
 
 
-			
-		elif ((not(next_x - current_x == 0)) and (not(next_y - current_y))):
-			print "something is broken"
+				
+			else:
+				print "something is broken"
+				print current_point
+				print next_point
+
+	WaypointCells.append(pointList[len(pointList)-1])
+
+	print WaypointCells
+
+	return WaypointCells
 
 
-if __name__ == '__main__':
-	rospy.init_node('megagnon_Lab_3_Waypoint_node')
+# if __name__ == '__main__':
+# 	rospy.init_node('megagnon_Lab_3_Waypoint_node')
 
-	rospy.Subscriber('path', GridCells, Waypoints)
+# 	rospy.Subscriber('path', GridCells, Waypoints)
 
-	test = [(0,0), (0,1), (0,2), (1,2), (1,3)]
+# 	test = [(0,0), (0,1), (0,2), (1,2), (1,3)]
 
-	print "starting Waypoints"
-	Waypoints(test)
-	print "end Waypoints"
+# 	print "starting Waypoints"
+# 	Waypoints(test)
+# 	print "end Waypoints"
 

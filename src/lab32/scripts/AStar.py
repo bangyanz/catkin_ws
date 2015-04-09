@@ -48,7 +48,7 @@ def GetData (x, y, gridMap):
 	return gridMap.data[dataLocation]
 
 def GetHeuristic (a, b):
-	return ((abs(a.x - b.x) + abs(a.y - b.y)) * 2)
+	return ((abs(a.x - b.x) + abs(a.y - b.y))*2)
 
 def IsSame (a, b):
 	return (a.x == b.x and a.y == b.y)
@@ -85,16 +85,16 @@ def GetPath (gridMap, start, goal):
 	currentIndex = 0
 	pathList = []
 
+	print "getting path"
 	while not IsSame(currentNode, start):
 		#path.poses[currentIndex].pose.position = currentNode
+		print currentNode
 		pathList.append(currentNode)
 		currentNode = parents[currentNode]
 		currentIndex += 1
 
 	#path.poses[currentIndex].pose.position = start
 	pathList.append(start)
-
-	print pathList
 
 	publishablePath = MakeGridCellsFromList(pathList)
 	print "found path"
@@ -109,6 +109,61 @@ def MakeGridCellsFromList (cellList):
 	gridCells.cells = cellList
 	gridCells.header.frame_id = 'map'
 	return gridCells
+
+def HashPoint (point):
+	return ("x"+str(point.x)+"y"+str(point.y)+"z"+str(point.z))
+
+def Waypoints (pointList):
+
+	print "waypoints!"
+
+	waypointpub = rospy.Publisher('waypoints', GridCells)
+	WaypointCells = []
+
+	i = 0
+	current_state = 2
+
+	for item in pointList:
+		current_point = item
+		if (i < len(pointList)-1):
+			next_point = pointList[i+1]
+			i += 1
+
+			#if the x coordinate is changing and the y coordinate is staying the same
+			if ((not(next_point.x - current_point.x == 0)) and (next_point.y - current_point.y == 0)):
+				if (current_state == 1):
+					WaypointCells.append(current_point)
+					publishableWaypoints = MakeGridCellsFromList(WaypointCells)
+					waypointpub.publish(publishableWaypoints)
+					time.sleep(.2)
+
+				current_state = 0	
+				
+			#if the x coordinate is staying the same and the y coordinate is changing
+			elif ((next_point.x - current_point.x == 0) and (not(next_point.y - current_point.y == 0))):
+				if (current_state == 0):
+					WaypointCells.append(current_point)
+					publishableWaypoints = MakeGridCellsFromList(WaypointCells)
+					waypointpub.publish(publishableWaypoints)
+					time.sleep(.2)
+				current_state = 1
+
+
+				
+			else:
+				print "something is broken"
+				print current_point
+				print next_point
+
+	WaypointCells.append(pointList[len(pointList)-1])
+
+	publishableWaypoints = MakeGridCellsFromList(WaypointCells)
+	waypointpub.publish(publishableWaypoints)
+	time.sleep(.5)
+
+	print WaypointCells
+
+	return WaypointCells
 	
 
 def SearchForGoal (gridMap, start, goal):
@@ -118,9 +173,7 @@ def SearchForGoal (gridMap, start, goal):
 	parents = {}
 	parents[start] = None
 	costs = {}
-	costs2 = {}
-	costs[start] = 0
-	costs2[start] = 0
+	costs[HashPoint(start)] = 0
 	frontierList = [start]
 	visited = []
 	found = [start]
@@ -139,39 +192,39 @@ def SearchForGoal (gridMap, start, goal):
 
 	while not frontier.empty():
 		time.sleep(.03)
-		#publishing
-		publishableFrontier = MakeGridCellsFromList(frontierList)
-		frontierPublisher.publish(publishableFrontier)
-		publishableVisited = MakeGridCellsFromList(visited)
-		visitedPublisher.publish(publishableVisited)
 		
 		#get from frontier and update lists
 		p, currentNode = frontier.get()
-		print currentNode
-		frontierList.remove(currentNode)
-		visited.append(currentNode)
-		print costs2[currentNode]
+		if currentNode not in visited:
+			print currentNode
+			frontierList.remove(currentNode)
+			visited.append(currentNode)
 
-		#if found goal
-		if (IsSame(currentNode, goal)):
-			success = 1
-			break
+			#publishing
+			publishableFrontier = MakeGridCellsFromList(frontierList)
+			frontierPublisher.publish(publishableFrontier)
+			publishableVisited = MakeGridCellsFromList(visited)
+			visitedPublisher.publish(publishableVisited)
 
-		for neighbor in GetNeighbors(currentNode, gridMap):
-			costToNeighbor = costs[currentNode] + 1
-		
-			if neighbor not in found:
+			#if found goal
+			if (IsSame(currentNode, goal)):
+				success = 1
+				break
 
-				costs[neighbor] = costToNeighbor
-				found.append(neighbor)
+			for neighbor in GetNeighbors(currentNode, gridMap):
+				costToNeighbor = costs[HashPoint(currentNode)] + 1
+			
+				if neighbor not in found or costs[HashPoint(neighbor)] > costToNeighbor:
 
-				priority = costToNeighbor + GetHeuristic(neighbor, goal)
-				frontier.put((priority, neighbor))
-				costs2[neighbor] = priority
+					costs[HashPoint(neighbor)] = costToNeighbor
 
-				if neighbor not in frontierList:
-					frontierList.append(neighbor)
-				parents[neighbor] = currentNode
+					priority = costToNeighbor + GetHeuristic(neighbor, goal)
+					frontier.put((priority, neighbor))
+
+					if neighbor not in found:
+						frontierList.append(neighbor)
+						found.append(neighbor)
+					parents[neighbor] = currentNode
 	
 	if success:
 		return parents, costs, currentNode

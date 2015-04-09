@@ -4,6 +4,8 @@ import rospy, tf
 
 import AStar
 
+import waypoints
+
 from tf.transformations import euler_from_quaternion
 
 from kobuki_msgs.msg import BumperEvent
@@ -67,9 +69,9 @@ if __name__ == '__main__':
 			print "waiting"
 
 		path = AStar.GetPath(occupancyGrid, start, goal)
+		waypoints = AStar.Waypoints(path)
 		goalReady = 0
 		start.x = goal.x
 		start.y = goal.y
-		waypoints.Waypoints(path)
 
 	print "Lab 3 complete!"
