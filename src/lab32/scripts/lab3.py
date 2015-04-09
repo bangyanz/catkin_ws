@@ -70,5 +70,6 @@ if __name__ == '__main__':
 		goalReady = 0
 		start.x = goal.x
 		start.y = goal.y
+		waypoints.Waypoints(path)
 
 	print "Lab 3 complete!"
