@@ -2,9 +2,7 @@
 
 import rospy, tf
 
-import AStar
-
-import waypoints
+import AStar, ObstacleExpansionn, waypoints, waypoint_math
 
 from tf.transformations import euler_from_quaternion
 
@@ -35,9 +33,23 @@ def GoalCallback(goalPoint):
 	print "printing goal"
 	print goal
 
+#Odometry Callback function
+def OdometryCallback(msg):
+	#Current x, y, and theta
+	global x, y, theta
+	xPos = msg.pose.pose.position.x
+	yPos = msg.pose.pose.position.y
+	orientation = msg.pose.pose.orientation
+	quaternion = [orientation.x, orientation.y, orientation.z, orientation.w]
+	roll, pitch, yaw = euler_from_quaternion(quaternion)
+
+	x = xPos
+	y = yPos
+	theta = yaw
+
 if __name__ == '__main__':
 
-	global mapReady, occupancyGrid, goalReady, goal
+	global mapReady, occupancyGrid, goalReady, goal, x, y, theta
 
 	mapReady = 0
 	goalReady = 0
@@ -48,6 +60,7 @@ if __name__ == '__main__':
 	rospy.init_node('Lab_4_node')
 
 	rospy.Subscriber('map', OccupancyGrid, MapCallback)
+	rospy.Subscriber('odom', Odometry, OdometryCallback) 
 	#rospy.Subscriber('map_metadata', MapMetaData, MapMetaCallback)
 	rospy.Subscriber('move_base_simple/goal', PoseStamped, GoalCallback)
 	#rospy.Subscriber('initialpose', PoseWithCovarianceStamped, InitialPoseCallback)
@@ -63,13 +76,20 @@ if __name__ == '__main__':
 	start.y = 1
 	start.z = 0
 
+	while not mapReady:
+		time.sleep(.3)
+		print "please publish map"
+
 	while 1:
-		while not mapReady or not goalReady:
+		while not goalReady:
 			time.sleep(.3)
 			print "waiting"
 
-		path = AStar.GetPath(occupancyGrid, start, goal)
+		expandedMap = ObstacleExpansion.ExpandMap(occupancyGrid)
+		path = AStar.GetPath(expandedMap, start, goal)
 		waypoints = AStar.Waypoints(path)
+		turnAngle = waypoint_math.ChooseTurnDirection(waypoints, x, y, theta)
+		print turnAngle
 		goalReady = 0
 		start.x = goal.x
 		start.y = goal.y

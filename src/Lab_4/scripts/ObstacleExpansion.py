@@ -15,15 +15,17 @@ def ExpandMap(occupancyGrid):
 
 	expandedData = list(expandedGrid.data)
 
-	for i in range (0, width):
-		for j in range (0, height):
-			if (occupancyGrid.data[i + (height * j)] >= 1):
-				for k in range (i - 2, i + 3):
-					for l in range (j - 2, j + 3):
+	print "expanding"
+	for i in range (0, height):
+		for j in range (0, width):
+			if (occupancyGrid.data[j + (width * i)] >= 1):
+				for k in range (j - 2, j + 3):
+					for l in range (i - 2, i + 3):
 						if (k > 0 and k < width and l > 0 and l < height):
-							expandedData[k + (height * l)] = 100
+							expandedData[k + (width * l)] = 100
 
 	expandedGrid.data = tuple(expandedData)
+	print "expanded"
 	return expandedGrid
 
 

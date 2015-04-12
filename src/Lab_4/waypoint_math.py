@@ -2,9 +2,8 @@
 import rospy
 import math
 
-def ChooseTurnDirection (waypointList):
+def ChooseTurnDirection (waypointList, x, y, theta):
 
-	global x, y, theta
 	goal_waypoint = waypointList[1]
 	goal_x = goal_waypoint.x - x
 	goal_y = goal_waypoint.y - y
@@ -20,24 +19,24 @@ def ChooseTurnDirection (waypointList):
 		goal_theta = theta - math.atan(goal_y/goal_x) 
 	return goal_theta
 
-#Odometry Callback function
-def OdometryCallback(msg):
-	#Current x, y, and theta
-	global x, y, theta
-	xPos = msg.pose.pose.position.x
-	yPos = msg.pose.pose.position.y
-	orientation = msg.pose.pose.orientation
-	quaternion = [orientation.x, orientation.y, orientation.z, orientation.w]
-	roll, pitch, yaw = euler_from_quaternion(quaternion)
+# #Odometry Callback function
+# def OdometryCallback(msg):
+# 	#Current x, y, and theta
+# 	global x, y, theta
+# 	xPos = msg.pose.pose.position.x
+# 	yPos = msg.pose.pose.position.y
+# 	orientation = msg.pose.pose.orientation
+# 	quaternion = [orientation.x, orientation.y, orientation.z, orientation.w]
+# 	roll, pitch, yaw = euler_from_quaternion(quaternion)
 
-	x = xPos
-	y = yPos
-	theta = yaw
+# 	x = xPos
+# 	y = yPos
+# 	theta = yaw
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
 
-	global x, y, theta
+# 	global x, y, theta
 
-	x, y, theta = 0
+# 	x, y, theta = 0
 
-	rospy.Subscriber('odom', Odometry, OdometryCallback) 
+# 	rospy.Subscriber('odom', Odometry, OdometryCallback) 
