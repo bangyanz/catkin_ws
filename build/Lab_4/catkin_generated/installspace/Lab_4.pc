@@ -1,0 +1,8 @@
+prefix=/home/jbmorse/catkin_ws/install
+
+Name: Lab_4
+Description: Description of Lab_4
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/jbmorse/catkin_ws/install/lib 
+Requires: 
