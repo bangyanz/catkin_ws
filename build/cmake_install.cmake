@@ -125,6 +125,7 @@ ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unsp
 IF(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   INCLUDE("/home/jbmorse/catkin_ws/build/gtest/cmake_install.cmake")
+  INCLUDE("/home/jbmorse/catkin_ws/build/Lab_4/cmake_install.cmake")
   INCLUDE("/home/jbmorse/catkin_ws/build/jmorse_lab2/cmake_install.cmake")
   INCLUDE("/home/jbmorse/catkin_ws/build/jbmorse_lab3/cmake_install.cmake")
   INCLUDE("/home/jbmorse/catkin_ws/build/lab3/cmake_install.cmake")

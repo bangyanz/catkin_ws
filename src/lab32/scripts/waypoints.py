@@ -38,7 +38,6 @@ def Waypoints (pointList):
 
 			#if the x coordinate is changing and the y coordinate is staying the same
 			if ((not(next_point.x - current_point.x == 0)) and (next_point.y - current_point.y == 0)):
-				print "I hope I'm going left/right"
 				if (current_state == 1):
 					WaypointCells.append(current_point)
 					publishableWaypoints = MakeGridCellsFromList(WaypointCells)
@@ -49,7 +48,6 @@ def Waypoints (pointList):
 				
 			#if the x coordinate is staying the same and the y coordinate is changing
 			elif ((next_point.x - current_point.x == 0) and (not(next_point.y - current_point.y == 0))):
-				print "I hope I'm going up/down"
 				if (current_state == 0):
 					WaypointCells.append(current_point)
 					publishableWaypoints = MakeGridCellsFromList(WaypointCells)

@@ -237,7 +237,7 @@ _catkin_empty_exported_target: cmake_check_build_system
 
 # fast build rule for target.
 _catkin_empty_exported_target/fast:
-	$(MAKE) -f jmorse_lab2/CMakeFiles/_catkin_empty_exported_target.dir/build.make jmorse_lab2/CMakeFiles/_catkin_empty_exported_target.dir/build
+	$(MAKE) -f Lab_4/CMakeFiles/_catkin_empty_exported_target.dir/build.make Lab_4/CMakeFiles/_catkin_empty_exported_target.dir/build
 .PHONY : _catkin_empty_exported_target/fast
 
 #=============================================================================

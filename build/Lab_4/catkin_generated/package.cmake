@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "Lab_4")
+set(Lab_4_MAINTAINER "michelle <michelle@todo.todo>")
+set(Lab_4_DEPRECATED "")
+set(Lab_4_VERSION "0.0.0")
+set(Lab_4_BUILD_DEPENDS )
+set(Lab_4_RUN_DEPENDS )
+set(Lab_4_BUILDTOOL_DEPENDS "catkin")

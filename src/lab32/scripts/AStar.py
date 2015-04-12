@@ -123,6 +123,8 @@ def Waypoints (pointList):
 	i = 0
 	current_state = 2
 
+	WaypointCells.append(pointList[0])
+
 	for item in pointList:
 		current_point = item
 		if (i < len(pointList)-1):
