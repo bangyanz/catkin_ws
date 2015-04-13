@@ -11,14 +11,28 @@ def ExpandMap(occupancyGrid):
 	width = occupancyGrid.info.width
 	height = occupancyGrid.info.height
 
-	expandedGrid = OccupancyGrid(occupancyGrid.header, occupancyGrid.info, occupancyGrid.data)
+	lowerResGrid = OccupancyGrid(occupancyGrid.header, occupancyGrid.info, [])
 
-	expandedData = list(expandedGrid.data)
+	lowerResGrid.info.resolution = .1
+	lowerResGrid.info.width = int(math.ceil(width/2))
+	lowerResGrid.info.height = int(math.ceil(height/2))
+
+	lowerResGrid.data = []
+
+	for i in range (0, int(math.ceil(height/2))):
+		for j in range (0, int(math.ceil(width/2))):
+			if occupancyGrid.data[(j*2) + (width * i*2)] >= 1 or \
+				occupancyGrid.data[(j*2) + (width * ((i*2)+1)] >= 1 or \
+				occupancyGrid.data[(j*2)+1 + (width * i*2)] >= 1 or \
+				occupancyGrid.data[(j*2)+1 + (width * ((i*2)+1)] >= 1:
+				lowerResGrid.data[j + (width * i)] = 100
+
+	expandedData = list(lowerResGrid.data)
 
 	print "expanding"
 	for i in range (0, height):
 		for j in range (0, width):
-			if (occupancyGrid.data[j + (width * i)] >= 1):
+			if (lowerResGrid.data[j + (width * i)] >= 1):
 				for k in range (j - 2, j + 3):
 					for l in range (i - 2, i + 3):
 						if (k > 0 and k < width and l > 0 and l < height):
@@ -26,7 +40,7 @@ def ExpandMap(occupancyGrid):
 
 	expandedGrid.data = tuple(expandedData)
 	print "expanded"
-	return expandedGrid
+	return expandedGrid, lowerResGrid
 
 
 def MapCallback(occupancy):

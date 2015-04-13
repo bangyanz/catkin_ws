@@ -2,7 +2,7 @@
 
 import rospy, tf
 
-import AStar, ObstacleExpansionn, waypoints, waypoint_math
+import AStar, ObstacleExpansion, waypoints, waypoint_math
 
 from tf.transformations import euler_from_quaternion
 
@@ -136,6 +136,8 @@ if __name__ == '__main__':
 	rospy.Subscriber('move_base_simple/goal', PoseStamped, GoalCallback)
 	#rospy.Subscriber('initialpose', PoseWithCovarianceStamped, InitialPoseCallback)
 	publisher = rospy.Publisher('cmd_vel_mux/input/teleop', Twist) 
+	expPub = rospy.Publisher('expandedMap', OccupancyGrid)
+	resPub = rospy.Publisher('lowerResMap', OccupancyGrid)
 
 	odom_list = tf.TransformListener()
 
@@ -157,10 +159,12 @@ if __name__ == '__main__':
 			time.sleep(.3)
 			print "waiting"
 
-		expandedMap = ObstacleExpansion.ExpandMap(occupancyGrid)
+		expandedMap, lowerResMap = ObstacleExpansion.ExpandMap(occupancyGrid)
+		resPub.publish(lowerResMap)
+		expPub.publish(expandedMap)
 		path = AStar.GetPath(expandedMap, start, goal)
 		waypoints = AStar.Waypoints(path)
-		for waypoint in range (1, len(waypoints))
+		for waypoint in range (1, len(waypoints)):
 			turnAngle = waypoint_math.ChooseTurnDirection(waypoint, x, y, theta)
 			print turnAngle
 			Rotate(turnAngle)
