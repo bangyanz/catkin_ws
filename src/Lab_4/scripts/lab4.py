@@ -27,8 +27,8 @@ def GoalCallback(goalPoint):
 	global goalReady, goal
 
 	goalReady = 1
-	goal.x = int(round(goalPoint.pose.position.x))
-	goal.y = int(round(goalPoint.pose.position.y))
+	goal.x = int(round(goalPoint.pose.position.x*10, 0))
+	goal.y = int(round(goalPoint.pose.position.y*10, 0))
 	goal.z = 0
 	print "printing goal"
 	print goal
@@ -146,8 +146,6 @@ if __name__ == '__main__':
 	print "Starting Lab 4"
 
 	start = Point()
-	start.x = 1
-	start.y = 1
 	start.z = 0
 
 	while not mapReady:
@@ -162,6 +160,8 @@ if __name__ == '__main__':
 		expandedMap, lowerResMap = ObstacleExpansion.ExpandMap(occupancyGrid)
 		resPub.publish(lowerResMap)
 		expPub.publish(expandedMap)
+		start.x = int(round(x*10, 0))
+		start.y = int(round(y*10, 0))
 		path = AStar.GetPath(expandedMap, start, goal)
 		waypoints = AStar.Waypoints(path)
 		for waypoint in range (1, len(waypoints)):
