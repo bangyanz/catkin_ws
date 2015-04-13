@@ -2,9 +2,9 @@
 import rospy
 import math
 
-def ChooseTurnDirection (waypointList, x, y, theta):
+def ChooseTurnDirection (goal_waypoint, x, y, theta):
 
-	goal_waypoint = waypointList[1]
+	#goal_waypoint = waypointList[1]
 	goal_x = goal_waypoint.x - x
 	goal_y = goal_waypoint.y - y
 
@@ -18,6 +18,10 @@ def ChooseTurnDirection (waypointList, x, y, theta):
 	else:
 		goal_theta = theta - math.atan(goal_y/goal_x) 
 	return goal_theta
+
+def ChooseDriveDistance (goal_waypoint, x, y, theta):
+	return ((((x - goal_waypoint.x) ** 2) + ((y - goal_waypoint.y) ** 2)) ** (0.5))
+
 
 # #Odometry Callback function
 # def OdometryCallback(msg):

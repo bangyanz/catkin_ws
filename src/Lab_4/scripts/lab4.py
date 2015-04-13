@@ -47,6 +47,74 @@ def OdometryCallback(msg):
 	y = yPos
 	theta = yaw
 
+	def PublishTwist(linearVelocity, angularVelocity):
+
+	twist = Twist()
+	twist.linear.x = linearVelocity
+	twist.linear.y = 0
+	twist.linear.z = 0
+	twist.angular.x = 0
+	twist.angular.y = 0
+	twist.angular.z = angularVelocity
+
+	publisher.publish(twist)
+
+#Drive straight function
+def DriveStraight(speed, distance):
+
+	global x, y
+	tol = .1
+	acc = 0
+
+	xGoal = x + distance * math.cos(theta)
+	yGoal = y + distance * math.sin(theta)
+
+	while ((x < xGoal - tol or x > xGoal + tol) or (y < yGoal - tol or y > yGoal + tol)):
+		acc += .1
+		if (acc > 1):
+			acc = 1
+		PublishTwist(speed * acc, 0)
+		time.sleep(.1)
+
+	while (acc != 0):
+		acc -= .1
+		if (acc < 0):
+			acc = 0
+		PublishTwist(speed * acc, 0)
+		time.sleep(.1)
+
+	print "Drove straight"
+	PublishTwist(0, 0)
+
+	#BlindMethod
+	#SpinWheels(speed, speed, distance / speed)
+
+
+def Rotate(angleOfRotation):
+
+	global theta
+
+	tol = math.pi / 36
+	
+	time.sleep(.5)
+
+	angleGoal = (theta + angleOfRotation) 
+	if (angleGoal > math.pi):
+		angleGoal -= (math.pi * 2)
+	elif (angleGoal < (-1 * math.pi)):
+		angleGoal += (math.pi * 2)
+
+	while (theta < angleGoal - tol or theta > angleGoal + tol):
+		if (angleOfRotation < 0):
+			PublishTwist(0, math.pi / -6)
+		else:
+			PublishTwist(0, math.pi / 6)
+		print theta
+		time.sleep(.1)
+
+	print "Rotated"
+	PublishTwist(0, 0)
+
 if __name__ == '__main__':
 
 	global mapReady, occupancyGrid, goalReady, goal, x, y, theta
@@ -88,8 +156,14 @@ if __name__ == '__main__':
 		expandedMap = ObstacleExpansion.ExpandMap(occupancyGrid)
 		path = AStar.GetPath(expandedMap, start, goal)
 		waypoints = AStar.Waypoints(path)
-		turnAngle = waypoint_math.ChooseTurnDirection(waypoints, x, y, theta)
-		print turnAngle
+		for waypoint in range (1, len(waypoints))
+			turnAngle = waypoint_math.ChooseTurnDirection(waypoint, x, y, theta)
+			print turnAngle
+			Rotate(turnAngle)
+			driveDistance = waypoint_math.ChooseDriveDistance (goal_waypoint, x, y)
+			print driveDistance
+			DriveStraight(.2, driveDistance)
+			#check for obstacles/change in map
 		goalReady = 0
 		start.x = goal.x
 		start.y = goal.y
