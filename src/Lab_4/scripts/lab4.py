@@ -2,7 +2,7 @@
 
 import rospy, tf
 
-import AStar, ObstacleExpansion, waypoints, waypoint_math
+import AStar, ObstacleExpansion, waypoint_math
 
 from tf.transformations import euler_from_quaternion
 
@@ -27,8 +27,8 @@ def GoalCallback(goalPoint):
 	global goalReady, goal
 
 	goalReady = 1
-	goal.x = int(round(goalPoint.pose.position.x*10, 0))
-	goal.y = int(round(goalPoint.pose.position.y*10, 0))
+	goal.x = goalPoint.pose.position.x
+	goal.y = goalPoint.pose.position.y
 	goal.z = 0
 	print "printing goal"
 	print goal
@@ -160,8 +160,8 @@ if __name__ == '__main__':
 		expandedMap, lowerResMap = ObstacleExpansion.ExpandMap(occupancyGrid)
 		resPub.publish(lowerResMap)
 		expPub.publish(expandedMap)
-		start.x = int(round(x*10, 0))
-		start.y = int(round(y*10, 0))
+		start.x = x
+		start.y = y
 		path = AStar.GetPath(expandedMap, start, goal)
 		waypoints = AStar.Waypoints(path)
 		for waypoint in range (1, len(waypoints)):

@@ -78,6 +78,8 @@ def GetPath (gridMap, start, goal):
 	#pathPublisher.publish(blankPath)
 	#time.sleep(1)
 
+	translatedStart, translatedGoal = translatePoints(gridMap, start, goal)
+
 	parents, costs, currentNode = SearchForGoal(gridMap, start, goal)
 	path = Path()
 	poseStampedList = []
@@ -86,7 +88,7 @@ def GetPath (gridMap, start, goal):
 	pathList = []
 
 	print "getting path"
-	while not IsSame(currentNode, start):
+	while not IsSame(currentNode, translatedStart):
 		#path.poses[currentIndex].pose.position = currentNode
 		print currentNode
 		pathList.append(currentNode)
@@ -94,7 +96,7 @@ def GetPath (gridMap, start, goal):
 		currentIndex += 1
 
 	#path.poses[currentIndex].pose.position = start
-	pathList.append(start)
+	pathList.append(translatedStart)
 
 	publishablePath = MakeGridCellsFromList(pathList)
 	print "found path"
@@ -147,8 +149,6 @@ def Waypoints (pointList):
 					waypointpub.publish(publishableWaypoints)
 					time.sleep(.2)
 				current_state = 1
-
-
 				
 			else:
 				print "something is broken"
@@ -164,6 +164,19 @@ def Waypoints (pointList):
 	print WaypointCells
 
 	return WaypointCells
+
+def translatePoints(gridMap, start, goal):
+
+	translatedStart = start
+	translatedGoal = goal
+
+	translatedStart.x = int(round((translatedStart.x - gridMap.info.origin.x) * 10, 0))
+	translatedStart.y = int(round((translatedStart.y - gridMap.info.origin.y) * 10, 0))
+
+	translatedGoal.x = int(round((translatedGoal.x - gridMap.info.origin.x) * 10, 0))
+	translatedGoal.y = int(round((translatedGoal.y - gridMap.info.origin.y) * 10, 0))
+
+	return translatedStart, translatedGoal
 	
 
 def SearchForGoal (gridMap, start, goal):
