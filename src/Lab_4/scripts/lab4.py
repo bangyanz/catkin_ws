@@ -47,7 +47,7 @@ def OdometryCallback(msg):
 	y = yPos
 	theta = yaw
 
-	def PublishTwist(linearVelocity, angularVelocity):
+def PublishTwist(linearVelocity, angularVelocity):
 
 	twist = Twist()
 	twist.linear.x = linearVelocity
@@ -57,7 +57,7 @@ def OdometryCallback(msg):
 	twist.angular.y = 0
 	twist.angular.z = angularVelocity
 
-	publisher.publish(twist)
+	twistPublisher.publish(twist)
 
 #Drive straight function
 def DriveStraight(speed, distance):
@@ -117,21 +117,25 @@ def Rotate(angleOfRotation):
 
 if __name__ == '__main__':
 
-	global mapReady, occupancyGrid, goalReady, goal, x, y, theta
+	global mapReady, occupancyGrid, goalReady, goal, x, y, theta, twistPublisher, wheelRadius, robotRadius, odom_list, bumper
+
+	rospy.init_node('Lab_4_node')
 
 	mapReady = 0
 	goalReady = 0
-
 	goal = Point()
 	occupancyGrid = None
 
-	rospy.init_node('Lab_4_node')
+	wheelRadius = .0381
+	robotRadius = .2286
+	bumper = 0
 
 	rospy.Subscriber('map', OccupancyGrid, MapCallback)
 	rospy.Subscriber('odom', Odometry, OdometryCallback) 
 	#rospy.Subscriber('map_metadata', MapMetaData, MapMetaCallback)
 	rospy.Subscriber('move_base_simple/goal', PoseStamped, GoalCallback)
 	#rospy.Subscriber('initialpose', PoseWithCovarianceStamped, InitialPoseCallback)
+	publisher = rospy.Publisher('cmd_vel_mux/input/teleop', Twist) 
 
 	odom_list = tf.TransformListener()
 
