@@ -24,7 +24,7 @@ def ExpandMap(occupancyGrid):
 			if occupancyGrid.data[(j*2) + (width * i*2)] >= 1 or \
 				occupancyGrid.data[(j*2) + (width * ((i*2)+1))] >= 1 or \
 				occupancyGrid.data[(j*2)+1 + (width * i*2)] >= 1 or \
-				occupancyGrid.data[(j*2)+1 + (width * ((i*2)+1))] >= 1:
+				occupancyGrid.data[(j*2)+1 + (width * ((i*2)+1)))] >= 1:
 				lowerResGrid.data[j + (width * i)] = 100
 
 	expandedData = list(lowerResGrid.data)
