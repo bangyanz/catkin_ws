@@ -21,6 +21,10 @@ def ExpandMap(occupancyGrid):
 	#if width is odd
 	#othervariable is width+1
 	#else othervariable is width
+	if width % 2 == 1:
+		new_width = width + 1
+	else:
+		new_width = width
 
 	lowerResGrid.data = [-1]*width*height
 
@@ -31,14 +35,14 @@ def ExpandMap(occupancyGrid):
 				occupancyGrid.data[(j*2) + (width*2 * ((i*2)+1))] >= 1 or \
 				occupancyGrid.data[(j*2)+1 + (width*2 * i*2)] >= 1 or \
 				occupancyGrid.data[(j*2)+1 + (width*2 * ((i*2)+1))] >= 1:
-				lowerResGrid.data[j + (width * i)] = 100 #put other variable here
+				lowerResGrid.data[j + (new_width * i)] = 100 #put other variable here
 			elif occupancyGrid.data[(j*2) + (width*2 * i*2)] == 0 and \
 				occupancyGrid.data[(j*2) + (width*2 * ((i*2)+1))] == 0 and \
 				occupancyGrid.data[(j*2)+1 + (width*2 * i*2)] == 0 and \
 				occupancyGrid.data[(j*2)+1 + (width*2 * ((i*2)+1))] == 0:
-				lowerResGrid.data[j + (width * i)] = 0 #put other variable here
+				lowerResGrid.data[j + (new_width * i)] = 0 #put other variable here
 			else:
-				lowerResGrid.data[j + (width * i)] = -1 #put other variable here
+				lowerResGrid.data[j + (new_width * i)] = -1 #put other variable here
 			#time.sleep(2)
 
 	expandedGrid = OccupancyGrid(lowerResGrid.header, lowerResGrid.info, lowerResGrid.data)
