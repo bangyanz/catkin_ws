@@ -22,7 +22,6 @@ def ExpandMap(occupancyGrid):
 
 	for i in range (0, height):
 		for j in range (0, width):
-			print i, j
 			if occupancyGrid.data[(j*2) + (occupancyGrid.info.width * i*2)] >= 1 or \
 				occupancyGrid.data[(j*2) + (occupancyGrid.info.width * ((i*2)+1))] >= 1 or \
 				occupancyGrid.data[(j*2)+1 + (occupancyGrid.info.width * i*2)] >= 1 or \
