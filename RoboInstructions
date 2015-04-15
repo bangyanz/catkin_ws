@@ -17,6 +17,9 @@ roslaunch turtlebot_rviz_launchers view_robot.launch
 For simulations
 roslaunch turtlebot_gazebo gmapping_demo.launch
 
+FOR NAVIGATION LAB 4
+roslaunch turtlebot_rviz_launchers view_navigation.launch
+
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 on turtlebot
 

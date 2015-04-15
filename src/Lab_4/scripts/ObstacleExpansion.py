@@ -11,7 +11,9 @@ def ExpandMap(occupancyGrid):
 
 	lowerResGrid = OccupancyGrid(occupancyGrid.header, occupancyGrid.info, [])
 
-	lowerResGrid.info.resolution = .4
+	oldWidth = occupancyGrid.info.width
+
+	lowerResGrid.info.resolution = .1
 	lowerResGrid.info.width = int(math.floor(float(occupancyGrid.info.width)/2))
 	lowerResGrid.info.height = int(math.floor(float(occupancyGrid.info.height)/2))
 
@@ -22,15 +24,15 @@ def ExpandMap(occupancyGrid):
 
 	for i in range (0, height):
 		for j in range (0, width):
-			if occupancyGrid.data[(j*2) + (occupancyGrid.info.width * i*2)] >= 1 or \
-				occupancyGrid.data[(j*2) + (occupancyGrid.info.width * ((i*2)+1))] >= 1 or \
-				occupancyGrid.data[(j*2)+1 + (occupancyGrid.info.width * i*2)] >= 1 or \
-				occupancyGrid.data[(j*2)+1 + (occupancyGrid.info.width * ((i*2)+1))] >= 1:
+			if occupancyGrid.data[(j*2) + (oldWidth * i*2)] >= 1 or \
+				occupancyGrid.data[(j*2) + (oldWidth * ((i*2)+1))] >= 1 or \
+				occupancyGrid.data[(j*2)+1 + (oldWidth * i*2)] >= 1 or \
+				occupancyGrid.data[(j*2)+1 + (oldWidth * ((i*2)+1))] >= 1:
 				lowerResGrid.data[j + (width * i)] = 100
-			elif occupancyGrid.data[(j*2) + (occupancyGrid.info.width * i*2)] == 0 and \
-				occupancyGrid.data[(j*2) + (occupancyGrid.info.width * ((i*2)+1))] == 0 and \
-				occupancyGrid.data[(j*2)+1 + (occupancyGrid.info.width * i*2)] == 0 and \
-				occupancyGrid.data[(j*2)+1 + (occupancyGrid.info.width * ((i*2)+1))] == 0:
+			elif occupancyGrid.data[(j*2) + (oldWidth * i*2)] == 0 and \
+				occupancyGrid.data[(j*2) + (oldWidth * ((i*2)+1))] == 0 and \
+				occupancyGrid.data[(j*2)+1 + (oldWidth * i*2)] == 0 and \
+				occupancyGrid.data[(j*2)+1 + (oldWidth * ((i*2)+1))] == 0:
 				lowerResGrid.data[j + (width * i)] = 0
 			else:
 				lowerResGrid.data[j + (width * i)] = -1
@@ -72,6 +74,8 @@ if __name__ == '__main__':
 	rospy.Subscriber('map', OccupancyGrid, MapCallback)
 	occPub = rospy.Publisher('expandedMap', OccupancyGrid)
 	resPub = rospy.Publisher('resMap', OccupancyGrid)
+
+	time.sleep(1)
 
 	odom_list = tf.TransformListener()
 

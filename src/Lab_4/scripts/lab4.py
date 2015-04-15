@@ -18,9 +18,11 @@ import time
 import math
 
 def MapCallback(occupancy):
-	global mapReady, occupancyGrid
+	global mapReady, occupancyGrid, stop
+	print "I need a map"
 	
 	mapReady = 1
+	stop = 1
 	occupancyGrid = occupancy
 
 def GoalCallback(goalPoint):
@@ -62,21 +64,21 @@ def PublishTwist(linearVelocity, angularVelocity):
 #Drive straight function
 def DriveStraight(speed, distance):
 
-	global x, y
+	global x, y, stop
 	tol = .1
 	acc = 0
 
 	xGoal = x + distance * math.cos(theta)
 	yGoal = y + distance * math.sin(theta)
 
-	while ((x < xGoal - tol or x > xGoal + tol) or (y < yGoal - tol or y > yGoal + tol)):
+	while ((x < xGoal - tol or x > xGoal + tol) or (y < yGoal - tol or y > yGoal + tol) or (stop == 1)):
 		acc += .1
 		if (acc > 1):
 			acc = 1
 		PublishTwist(speed * acc, 0)
 		time.sleep(.1)
 
-	while (acc != 0):
+	while ((acc != 0) or stop == 1):
 		acc -= .1
 		if (acc < 0):
 			acc = 0
@@ -117,12 +119,15 @@ def Rotate(angleOfRotation):
 
 if __name__ == '__main__':
 
-	global mapReady, occupancyGrid, goalReady, goal, x, y, theta, twistPublisher, wheelRadius, robotRadius, odom_list, bumper
+	global mapReady, occupancyGrid, goalReady, goal, x, y, theta, twistPublisher, wheelRadius, robotRadius, odom_list, bumper, stop
+
+	print "starting"
 
 	rospy.init_node('Lab_4_node')
 
 	mapReady = 0
 	goalReady = 0
+	stop = 0
 	goal = Point()
 	occupancyGrid = None
 
@@ -133,9 +138,9 @@ if __name__ == '__main__':
 	rospy.Subscriber('map', OccupancyGrid, MapCallback)
 	rospy.Subscriber('odom', Odometry, OdometryCallback) 
 	#rospy.Subscriber('map_metadata', MapMetaData, MapMetaCallback)
-	rospy.Subscriber('move_base_simple/goal', PoseStamped, GoalCallback)
+	rospy.Subscriber('move_base_simple/goal2', PoseStamped, GoalCallback)
 	#rospy.Subscriber('initialpose', PoseWithCovarianceStamped, InitialPoseCallback)
-	publisher = rospy.Publisher('cmd_vel_mux/input/teleop', Twist) 
+	twistPublisher = rospy.Publisher('cmd_vel_mux/input/teleop', Twist) 
 	expPub = rospy.Publisher('expandedMap', OccupancyGrid)
 	resPub = rospy.Publisher('lowerResMap', OccupancyGrid)
 
@@ -162,18 +167,26 @@ if __name__ == '__main__':
 		expPub.publish(expandedMap)
 		start.x = x
 		start.y = y
-		path = AStar.GetPath(expandedMap, start, goal)
-		waypoints = AStar.Waypoints(path)
-		for waypoint in range (1, len(waypoints)):
-			turnAngle = waypoint_math.ChooseTurnDirection(waypoint, x, y, theta)
-			print turnAngle
-			Rotate(turnAngle)
-			driveDistance = waypoint_math.ChooseDriveDistance (goal_waypoint, x, y)
-			print driveDistance
-			DriveStraight(.2, driveDistance)
-			#check for obstacles/change in map
+		print x, y
+		print goal.x, goal.y
+		stop = 0
+		try:
+			path = AStar.GetPath(expandedMap, start, goal)
+			waypoints = AStar.Waypoints(path)
+			for i in range (1, len(waypoints)):
+				translatedWaypoint = waypoint_math.TranslateWaypoint(expandedMap, waypoints[i])
+				turnAngle = waypoint_math.ChooseTurnDirection(translatedWaypoint, x, y, theta)
+				print turnAngle
+				Rotate(turnAngle)
+				driveDistance = waypoint_math.ChooseDriveDistance (translatedWaypoint, x, y, theta)
+				print driveDistance
+				DriveStraight(.2, driveDistance)
+				if (stop == 1):
+					break
+				#check for obstacles/change in map
+		except (AStar.NoPathError):
+			continue
+		
 		goalReady = 0
-		start.x = goal.x
-		start.y = goal.y
 
 	print "Lab 4 complete!"

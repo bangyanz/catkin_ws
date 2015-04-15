@@ -44,7 +44,7 @@ def GetData (x, y, gridMap):
 	height = gridMap.info.height
 	if (x < 0 or x > width or y < 0 or y > height):
 		return 1
-	dataLocation = (height * y) + x
+	dataLocation = (width * y) + x
 	return gridMap.data[dataLocation]
 
 def GetHeuristic (a, b):
@@ -56,6 +56,10 @@ def IsSame (a, b):
 def GetNeighbors (a, gridMap):
 	neighbors = []
 	#north
+	print GetData(a.x, a.y + 1, gridMap)
+	print GetData(a.x + 1, a.y, gridMap)
+	print GetData(a.x, a.y - 1, gridMap)
+	print GetData(a.x - 1, a.y, gridMap)
 	if (GetData(a.x, a.y + 1, gridMap) == 0):
 		neighbors.append(Point(a.x, a.y + 1, 0))
 	#east
@@ -170,11 +174,11 @@ def translatePoints(gridMap, start, goal):
 	translatedStart = start
 	translatedGoal = goal
 
-	translatedStart.x = int(round((translatedStart.x - gridMap.info.origin.x) * 10, 0))
-	translatedStart.y = int(round((translatedStart.y - gridMap.info.origin.y) * 10, 0))
+	translatedStart.x = int(round((translatedStart.x - gridMap.info.origin.position.x) * 10, 0))
+	translatedStart.y = int(round((translatedStart.y - gridMap.info.origin.position.y) * 10, 0))
 
-	translatedGoal.x = int(round((translatedGoal.x - gridMap.info.origin.x) * 10, 0))
-	translatedGoal.y = int(round((translatedGoal.y - gridMap.info.origin.y) * 10, 0))
+	translatedGoal.x = int(round((translatedGoal.x - gridMap.info.origin.position.x) * 10, 0))
+	translatedGoal.y = int(round((translatedGoal.y - gridMap.info.origin.position.y) * 10, 0))
 
 	return translatedStart, translatedGoal
 	
@@ -182,6 +186,8 @@ def translatePoints(gridMap, start, goal):
 def SearchForGoal (gridMap, start, goal):
 	print "starting a thing"
 	
+	print start, goal
+
 	#Lots of data things
 	parents = {}
 	parents[start] = None
