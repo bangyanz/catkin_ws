@@ -99,6 +99,8 @@ def Rotate(angleOfRotation):
 	global theta
 
 	tol = math.pi / 36
+
+	closertol = math.pi / 256
 	
 	time.sleep(.5)
 
@@ -112,13 +114,27 @@ def Rotate(angleOfRotation):
 		if (angleOfRotation < 0):
 			PublishTwist(0, math.pi / -4)
 		else:
-
 			PublishTwist(0, math.pi / 4)
 		print theta
 
 		time.sleep(.1)
 		print "I am at", theta
 		print "goalRotate", angleGoal
+
+	while (theta < angleGoal - closertol or theta > angleGoal + closertol):
+		if (angleOfRotation < 0):
+			PublishTwist(0, math.pi / -12)
+			if (theta < angleGoal + closertol):
+				break
+		else:
+			PublishTwist(0, math.pi / 12)
+			if (theta > angleGoal - closertol):
+				break
+		print theta
+
+		time.sleep(.05)
+		print "I am at", theta
+		print "goalRotate precision", angleGoal 
 
 	print "Rotated"
 	PublishTwist(0, 0)
@@ -182,11 +198,11 @@ if __name__ == '__main__':
 			path = AStar.GetPath(expandedMap, start, goal)
 			waypoints = AStar.Waypoints(path)
 			for i in range (1, len(waypoints)):
-				translatedWaypoint = waypoint_math.TranslateWaypoint(expandedMap, waypoints[i])
-				turnAngle = waypoint_math.ChooseTurnDirection(translatedWaypoint, x, y, theta)
+				newx, newy = waypoint_math.TranslateWaypoint(expandedMap, waypoints[i])
+				turnAngle = waypoint_math.ChooseTurnDirection(newx, newy, x, y, theta)
 				print turnAngle
 				Rotate(turnAngle)
-				driveDistance = waypoint_math.ChooseDriveDistance (translatedWaypoint, x, y, theta)
+				driveDistance = waypoint_math.ChooseDriveDistance (newx, newy, x, y, theta)
 				print driveDistance
 				DriveStraight(.4, driveDistance)
 				if (stop == 1):
