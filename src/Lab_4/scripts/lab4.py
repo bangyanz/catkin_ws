@@ -110,9 +110,12 @@ def Rotate(angleOfRotation):
 
 	while (theta < angleGoal - tol or theta > angleGoal + tol):
 		if (angleOfRotation < 0):
-			PublishTwist(0, math.pi / -6)
+			PublishTwist(0, math.pi / -4)
 		else:
-			PublishTwist(0, math.pi / 6)
+
+			PublishTwist(0, math.pi / 4)
+		print theta
+
 		time.sleep(.1)
 		print "goalRotate", angleGoal
 
@@ -182,7 +185,7 @@ if __name__ == '__main__':
 				Rotate(turnAngle)
 				driveDistance = waypoint_math.ChooseDriveDistance (translatedWaypoint, x, y, theta)
 				print driveDistance
-				DriveStraight(.2, driveDistance)
+				DriveStraight(.4, driveDistance)
 				if (stop == 1):
 					break
 				#check for obstacles/change in map
