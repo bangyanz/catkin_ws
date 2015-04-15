@@ -103,8 +103,8 @@ def Rotate(angleOfRotation):
 	closertol = math.pi / 256
 	
 	time.sleep(.5)
-
 	angleGoal = (theta + angleOfRotation) 
+
 	if (angleGoal > math.pi):
 		angleGoal -= (math.pi * 2)
 	elif (angleGoal < (-1 * math.pi)):
@@ -118,6 +118,7 @@ def Rotate(angleOfRotation):
 		print theta
 
 		time.sleep(.1)
+
 		print "I am at", theta
 		print "goalRotate", angleGoal
 

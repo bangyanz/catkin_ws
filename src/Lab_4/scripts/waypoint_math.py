@@ -52,6 +52,5 @@ if __name__ == '__main__':
 	 	goalx = float(input("Enter goalx: "))
 	 	goaly = float(input("Enter goaly: "))
 	 	starttheta = float(input("Enter starttheta: "))
-
 	 	goaltheta = ChooseTurnDirection(startx, starty, goalx, goaly, starttheta)
 	 	print "goaltheta", goaltheta
