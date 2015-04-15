@@ -22,7 +22,7 @@ def MapCallback(occupancy):
 	print "I need a map"
 	
 	mapReady = 1
-	stop = 1
+	#stop = 1
 	occupancyGrid = occupancy
 
 def GoalCallback(goalPoint):
@@ -48,7 +48,6 @@ def OdometryCallback(msg):
 	x = xPos
 	y = yPos
 	theta = yaw
-	print "I am at", x, y, theta
 
 def PublishTwist(linearVelocity, angularVelocity):
 
@@ -97,12 +96,13 @@ def DriveStraight(speed, distance):
 def Rotate(angleOfRotation):
 
 	global theta
+	print "theta", theta
 
 	tol = math.pi / 36
 	
 	time.sleep(.5)
-
 	angleGoal = (theta + angleOfRotation) 
+	print "angle goal", angleGoal
 	if (angleGoal > math.pi):
 		angleGoal -= (math.pi * 2)
 	elif (angleGoal < (-1 * math.pi)):
@@ -112,12 +112,10 @@ def Rotate(angleOfRotation):
 		if (angleOfRotation < 0):
 			PublishTwist(0, math.pi / -4)
 		else:
-<<<<<<< HEAD
+
 			PublishTwist(0, math.pi / 4)
 		print theta
-=======
-			PublishTwist(0, math.pi / 6)
->>>>>>> 539bb5a55692c1c77cb045f32f3430642d844f5a
+
 		time.sleep(.1)
 		print "goalRotate", angleGoal
 
