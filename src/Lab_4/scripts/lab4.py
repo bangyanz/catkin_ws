@@ -48,6 +48,7 @@ def OdometryCallback(msg):
 	x = xPos
 	y = yPos
 	theta = yaw
+	print "I am at", x, y, theta
 
 def PublishTwist(linearVelocity, angularVelocity):
 
@@ -71,14 +72,15 @@ def DriveStraight(speed, distance):
 	xGoal = x + distance * math.cos(theta)
 	yGoal = y + distance * math.sin(theta)
 
-	while ((x < xGoal - tol or x > xGoal + tol) or (y < yGoal - tol or y > yGoal + tol) or (stop == 1)):
+	while (((x < xGoal - tol or x > xGoal + tol) or (y < yGoal - tol or y > yGoal + tol)) and (stop != 1)):
 		acc += .1
 		if (acc > 1):
 			acc = 1
 		PublishTwist(speed * acc, 0)
+		print "goal drive", x, y
 		time.sleep(.1)
 
-	while ((acc != 0) or stop == 1):
+	while ((acc != 0) and stop != 1):
 		acc -= .1
 		if (acc < 0):
 			acc = 0
@@ -110,9 +112,12 @@ def Rotate(angleOfRotation):
 		if (angleOfRotation < 0):
 			PublishTwist(0, math.pi / -4)
 		else:
+
 			PublishTwist(0, math.pi / 4)
 		print theta
+
 		time.sleep(.1)
+		print "goalRotate", angleGoal
 
 	print "Rotated"
 	PublishTwist(0, 0)
