@@ -3,6 +3,7 @@
 # the thing josh said I needed
 import rospy
 import math
+import time
 
 def ChooseTurnDirection (goal_waypoint, x, y, theta):
 
@@ -19,6 +20,18 @@ def ChooseTurnDirection (goal_waypoint, x, y, theta):
 			goal_theta = -math.pi/2
 	else:
 		goal_theta = theta - math.atan(goal_y/goal_x) 
+
+	print "printing choose turn direction"
+	print x
+	print y
+	print goal_waypoint.x
+	print goal_waypoint.y
+	print goal_x
+	print goal_y
+	print theta
+	print goal_theta
+	time.sleep(10)
+
 	return goal_theta
 
 def ChooseDriveDistance (goal_waypoint, x, y, theta):
@@ -28,8 +41,13 @@ def TranslateWaypoint(gridMap, point):
 
 	translatedPoint = point
 
-	translatedPoint.x = int(round((translatedPoint.x / 10) + gridMap.info.origin.position.x, 0))
-	translatedPoint.y = int(round((translatedPoint.y / 10) + gridMap.info.origin.position.y, 0))
+	print gridMap.info.origin.position.x
+	print gridMap.info.origin.position.y
+	print translatedPoint.x
+	print translatedPoint.y
+
+	translatedPoint.x = ((float(translatedPoint.x)/ 10) + gridMap.info.origin.position.x)
+	translatedPoint.y = ((float(translatedPoint.y) / 10) + gridMap.info.origin.position.y)
 
 	return translatedPoint
 

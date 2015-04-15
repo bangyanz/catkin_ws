@@ -48,7 +48,6 @@ def OdometryCallback(msg):
 	x = xPos
 	y = yPos
 	theta = yaw
-	print "I am at", x, y, theta
 
 def PublishTwist(linearVelocity, angularVelocity):
 
@@ -77,7 +76,8 @@ def DriveStraight(speed, distance):
 		if (acc > 1):
 			acc = 1
 		PublishTwist(speed * acc, 0)
-		print "goal drive", x, y
+		print "I am at", x, y
+		print "goal drive", xGoal, yGoal
 		time.sleep(.1)
 
 	while ((acc != 0) and stop != 1):
@@ -117,6 +117,7 @@ def Rotate(angleOfRotation):
 		print theta
 
 		time.sleep(.1)
+		print "I am at", theta
 		print "goalRotate", angleGoal
 
 	print "Rotated"
@@ -167,13 +168,15 @@ if __name__ == '__main__':
 			time.sleep(.3)
 			print "waiting"
 
+		goalReady = 0
 		expandedMap, lowerResMap = ObstacleExpansion.ExpandMap(occupancyGrid)
 		resPub.publish(lowerResMap)
 		expPub.publish(expandedMap)
 		start.x = x
 		start.y = y
-		print x, y
-		print goal.x, goal.y
+		print "start", x, y
+		print "goal", goal.x, goal.y
+		time.sleep(1)
 		stop = 0
 		try:
 			path = AStar.GetPath(expandedMap, start, goal)
@@ -190,8 +193,7 @@ if __name__ == '__main__':
 					break
 				#check for obstacles/change in map
 		except (AStar.NoPathError):
+			print "No path error!"
 			continue
-		
-		goalReady = 0
 
 	print "Lab 4 complete!"
