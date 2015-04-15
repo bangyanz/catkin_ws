@@ -22,7 +22,7 @@ def MapCallback(occupancy):
 	print "I need a map"
 	
 	mapReady = 1
-	stop = 1
+	#stop = 1
 	occupancyGrid = occupancy
 
 def GoalCallback(goalPoint):
