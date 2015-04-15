@@ -97,15 +97,12 @@ def DriveStraight(speed, distance):
 def Rotate(angleOfRotation):
 
 	global theta
-	print "theta"
-	print theta
 
 	tol = math.pi / 36
 	
 	time.sleep(.5)
 	angleGoal = (theta + angleOfRotation) 
-	print "angle goal"
-	print angleGoal
+
 	if (angleGoal > math.pi):
 		angleGoal -= (math.pi * 2)
 	elif (angleGoal < (-1 * math.pi)):
@@ -120,12 +117,9 @@ def Rotate(angleOfRotation):
 		print theta
 
 		time.sleep(.1)
-<<<<<<< HEAD
-		#print "goalRotate", angleGoal
-=======
+
 		print "I am at", theta
 		print "goalRotate", angleGoal
->>>>>>> d8ef8ba395607e687cd102e8eb7c222c4fc36219
 
 	print "Rotated"
 	PublishTwist(0, 0)
