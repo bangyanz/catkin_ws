@@ -174,11 +174,27 @@ def translatePoints(gridMap, start, goal):
 	translatedStart = start
 	translatedGoal = goal
 
+<<<<<<< HEAD
+	translatedStart.x = int(round((translatedStart.x - gridMap.info.origin.position.x) * 10))
+	translatedStart.y = int(round((translatedStart.y - gridMap.info.origin.position.y) * 10))
+=======
+	print "start"
+	print goal
+	print gridMap.info.origin.position.x
+	print gridMap.info.origin.position.y
+	print translatedStart.x
+	print translatedStart.y
+	print translatedGoal
+	print translatedGoal.x
+	print translatedGoal.y
+	print "end"
+
 	translatedStart.x = int(round((translatedStart.x - gridMap.info.origin.position.x) * 10, 0))
 	translatedStart.y = int(round((translatedStart.y - gridMap.info.origin.position.y) * 10, 0))
+>>>>>>> d8ef8ba395607e687cd102e8eb7c222c4fc36219
 
-	translatedGoal.x = int(round((translatedGoal.x - gridMap.info.origin.position.x) * 10, 0))
-	translatedGoal.y = int(round((translatedGoal.y - gridMap.info.origin.position.y) * 10, 0))
+	translatedGoal.x = int(round((translatedGoal.x - gridMap.info.origin.position.x) * 10))
+	translatedGoal.y = int(round((translatedGoal.y - gridMap.info.origin.position.y) * 10))
 
 	return translatedStart, translatedGoal
 	
