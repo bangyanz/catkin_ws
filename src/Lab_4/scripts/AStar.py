@@ -45,6 +45,11 @@ def GetData (x, y, gridMap):
 	if (x < 0 or x > width or y < 0 or y > height):
 		return 1
 	dataLocation = (width * y) + x
+	print width
+	print height
+	print x
+	print y
+	print dataLocation
 	return gridMap.data[dataLocation]
 
 def GetHeuristic (a, b):
@@ -90,17 +95,27 @@ def GetPath (gridMap, start, goal):
 
 	pathList.append(translatedStart)
 
-	publishablePath = MakeGridCellsFromList(pathList)
+	publishablePath = MakeGridCellsFromList(gridMap, pathList)
 	print "found path"
 	pathPublisher.publish(publishablePath)
 
 	return pathList
 
-def MakeGridCellsFromList (cellList):
+def MakeGridCellsFromList (gridMap, cellList):
 	gridCells = GridCells()
-	gridCells.cell_width = 1
-	gridCells.cell_height = 1
-	gridCells.cells = cellList
+	gridCells.cell_width = .1
+	gridCells.cell_height = .1
+	newList = []
+	for i in range (0, len(cellList)):
+		x = ((float(cellList[i].x)/ 10) + gridMap.info.origin.position.x)
+		y = ((float(cellList[i].y)/ 10) + gridMap.info.origin.position.y)
+		newList.append(Point(x, y, 0))
+		print cellList[i].x
+		print cellList[i].y
+		print x
+		print y
+		#time.sleep(1)
+	gridCells.cells = newList
 	gridCells.header.frame_id = 'map'
 	return gridCells
 
@@ -111,7 +126,7 @@ def Waypoints (pointList):
 
 	print "waypoints!"
 
-	waypointpub = rospy.Publisher('waypoints', GridCells)
+	#waypointpub = rospy.Publisher('waypoints', GridCells)
 	WaypointCells = []
 
 	i = 0
@@ -127,8 +142,8 @@ def Waypoints (pointList):
 			if ((not(next_point.x - current_point.x == 0)) and (next_point.y - current_point.y == 0)):
 				if (current_state == 1):
 					WaypointCells.append(current_point)
-					publishableWaypoints = MakeGridCellsFromList(WaypointCells)
-					waypointpub.publish(publishableWaypoints)
+					#publishableWaypoints = MakeGridCellsFromList(WaypointCells)
+					#waypointpub.publish(publishableWaypoints)
 
 				current_state = 0	
 				
@@ -136,8 +151,8 @@ def Waypoints (pointList):
 			elif ((next_point.x - current_point.x == 0) and (not(next_point.y - current_point.y == 0))):
 				if (current_state == 0):
 					WaypointCells.append(current_point)
-					publishableWaypoints = MakeGridCellsFromList(WaypointCells)
-					waypointpub.publish(publishableWaypoints)
+					#publishableWaypoints = MakeGridCellsFromList(WaypointCells)
+					#waypointpub.publish(publishableWaypoints)
 				current_state = 1
 				
 			else:
@@ -147,8 +162,8 @@ def Waypoints (pointList):
 
 	WaypointCells.append(pointList[len(pointList)-1])
 
-	publishableWaypoints = MakeGridCellsFromList(WaypointCells)
-	waypointpub.publish(publishableWaypoints)
+	#publishableWaypoints = MakeGridCellsFromList(WaypointCells)
+	#waypointpub.publish(publishableWaypoints)
 
 	print WaypointCells
 
@@ -204,9 +219,9 @@ def SearchForGoal (gridMap, start, goal):
 			visited.append(currentNode)
 
 			#publishing
-			publishableFrontier = MakeGridCellsFromList(frontierList)
+			publishableFrontier = MakeGridCellsFromList(gridMap, frontierList)
 			frontierPublisher.publish(publishableFrontier)
-			publishableVisited = MakeGridCellsFromList(visited)
+			publishableVisited = MakeGridCellsFromList(gridMap, visited)
 			visitedPublisher.publish(publishableVisited)
 
 			#if found goal

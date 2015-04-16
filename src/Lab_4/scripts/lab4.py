@@ -20,6 +20,12 @@ import math
 def MapCallback(occupancy):
 	global mapReady, occupancyGrid, stop
 	print "I need a map"
+
+	#matt wuz here
+	# need to get the map's origin and resolution
+	mapOrigin = occupancy.info.origin.position
+	gridResolution = occupancy.info.resolution
+	gridOrigin = Point(mapOrigin.x + gridResolution/2 , mapOrigin.y + gridResolution/2 , 0)
 	
 	mapReady = 1
 	#stop = 1
@@ -36,6 +42,21 @@ def GoalCallback(goalPoint):
 	print goal
 
 #Odometry Callback function
+
+def timerCallback(event)
+	global x, y, theta
+	
+	try:
+		(trans,orientation) = odom_list.lookupTransform('map', 'base_footprint', rospy.Time(0))
+		quaternion = [orientation.x, orientation.y, orientation.z, orientation.w]
+		roll, pitch, yaw = euler_from_quaternion(quaternion)
+		x = trans[0]
+		y = trans[1]
+		theta = yaw
+		print x, y, theta
+	except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
+		pass
+
 def OdometryCallback(msg):
 	#Current x, y, and theta
 	global x, y, theta
@@ -141,6 +162,10 @@ if __name__ == '__main__':
 
 	global mapReady, occupancyGrid, goalReady, goal, x, y, theta, twistPublisher, wheelRadius, robotRadius, odom_list, bumper, stop
 
+	# mat wuz here
+	global mapOrigin, gridResolution, gridOrigin
+	#	
+
 	print "starting"
 
 	rospy.init_node('Lab_4_node')
@@ -167,6 +192,8 @@ if __name__ == '__main__':
 	odom_list = tf.TransformListener()
 
 	rospy.sleep(rospy.Duration(1, 0))
+
+	rospy.Timer(rospy.Duration(.01), timerCallback)
 
 	print "Starting Lab 4"
 
