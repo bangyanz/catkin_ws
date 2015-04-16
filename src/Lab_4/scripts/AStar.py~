@@ -115,7 +115,7 @@ def MakeGridCellsFromList (gridMap, cellList):
 		print x
 		print y
 		#time.sleep(1)
-	gridCells.cells = cellList
+	gridCells.cells = newList
 	gridCells.header.frame_id = 'map'
 	return gridCells
 

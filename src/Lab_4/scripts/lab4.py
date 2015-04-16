@@ -43,7 +43,7 @@ def GoalCallback(goalPoint):
 
 #Odometry Callback function
 
-def timerCallback(event)
+def timerCallback(event):
 	global x, y, theta
 	
 	try:

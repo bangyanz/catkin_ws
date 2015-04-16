@@ -53,6 +53,7 @@ def timerCallback(event)
 		x = trans[0]
 		y = trans[1]
 		theta = yaw
+		print x, y, theta
 	except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
 		pass
 
