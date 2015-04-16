@@ -22,7 +22,7 @@ def MapCallback(occupancy):
 	print "I need a map"
 	
 	mapReady = 1
-	stop = 1
+	#stop = 1
 	occupancyGrid = occupancy
 
 def GoalCallback(goalPoint):
@@ -85,9 +85,6 @@ def DriveStraight(speed, distance):
 		if (abs(localx) >= xdistance or localy >= ydistance):
 			break
 
-
-
-
 	print "Drove straight"
 	PublishTwist(0, 0)
 
@@ -100,10 +97,12 @@ def Rotate(angleOfRotation):
 	global theta
 
 	tol = math.pi / 36
+
+	closertol = math.pi / 256
 	
 	time.sleep(.5)
-
 	angleGoal = (theta + angleOfRotation) 
+
 	if (angleGoal > math.pi):
 		angleGoal -= (math.pi * 2)
 	elif (angleGoal < (-1 * math.pi)):
@@ -111,11 +110,30 @@ def Rotate(angleOfRotation):
 
 	while (theta < angleGoal - tol or theta > angleGoal + tol):
 		if (angleOfRotation < 0):
-			PublishTwist(0, math.pi / -6)
+			PublishTwist(0, math.pi / -4)
 		else:
-			PublishTwist(0, math.pi / 6)
+			PublishTwist(0, math.pi / 4)
 		print theta
+
 		time.sleep(.1)
+
+		print "I am at", theta
+		print "goalRotate", angleGoal
+
+	while (theta < angleGoal - closertol or theta > angleGoal + closertol):
+		if (angleOfRotation < 0):
+			PublishTwist(0, math.pi / -12)
+			if (theta < angleGoal + closertol):
+				break
+		else:
+			PublishTwist(0, math.pi / 12)
+			if (theta > angleGoal - closertol):
+				break
+		print theta
+
+		time.sleep(.05)
+		print "I am at", theta
+		print "goalRotate precision", angleGoal 
 
 	print "Rotated"
 	PublishTwist(0, 0)
@@ -165,31 +183,32 @@ if __name__ == '__main__':
 			time.sleep(.3)
 			print "waiting"
 
+		goalReady = 0
 		expandedMap, lowerResMap = ObstacleExpansion.ExpandMap(occupancyGrid)
 		resPub.publish(lowerResMap)
 		expPub.publish(expandedMap)
 		start.x = x
 		start.y = y
-		print x, y
-		print goal.x, goal.y
+		print "start", x, y
+		print "goal", goal.x, goal.y
+		time.sleep(1)
 		stop = 0
 		try:
 			path = AStar.GetPath(expandedMap, start, goal)
 			waypoints = AStar.Waypoints(path)
 			for i in range (1, len(waypoints)):
-				translatedWaypoint = waypoint_math.TranslateWaypoint(expandedMap, waypoints[i])
-				turnAngle = waypoint_math.ChooseTurnDirection(translatedWaypoint, x, y, theta)
+				newx, newy = waypoint_math.TranslateWaypoint(expandedMap, waypoints[i])
+				turnAngle = waypoint_math.ChooseTurnDirection(newx, newy, x, y, theta)
 				print turnAngle
 				Rotate(turnAngle)
-				driveDistance = waypoint_math.ChooseDriveDistance (translatedWaypoint, x, y, theta)
+				driveDistance = waypoint_math.ChooseDriveDistance (newx, newy, x, y, theta)
 				print driveDistance
-				DriveStraight(.2, driveDistance)
+				DriveStraight(.4, driveDistance)
 				if (stop == 1):
 					break
 				#check for obstacles/change in map
 		except (AStar.NoPathError):
+			print "No path error!"
 			continue
-		
-		goalReady = 0
 
 	print "Lab 4 complete!"

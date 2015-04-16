@@ -51,3 +51,17 @@ python lab3.py
 In Rviz:
 set waypoint goal
 repeat
+
+------------------------------------------------------
+
+Rviz instructions lab 4
+
+roslaunch turtlebot_gazebo turtlebot_world.launch
+
+roslaunch turtlebot_gazebo gmapping_demo.launch
+
+roslaunch turtlebot_rviz_launchers view_navigation.launch
+
+roslaunch turtlebot_teleop keyboard_teleop.launch --screen
+
+SUBSCRIBE NAVGOAL TO GOAL2

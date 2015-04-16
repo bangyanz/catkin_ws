@@ -3,54 +3,54 @@
 # the thing josh said I needed
 import rospy
 import math
+import time
+from geometry_msgs.msg import Point
 
-def ChooseTurnDirection (goal_waypoint, x, y, theta):
+def ChooseTurnDirection (goalx, goaly, startx, starty, theta):
 
 	#goal_waypoint = waypointList[1]
-	goal_x = goal_waypoint.x - x
-	goal_y = goal_waypoint.y - y
+	localx = goalx - startx
+	localy = goaly - starty
 
 	goal_theta = 0
 
-	if (goal_x == 0):
-		if (goal_y > 0):
+	if (localx == 0.0):
+		if (localy > 0.0):
 			goal_theta = math.pi/2
 		else:
 			goal_theta = -math.pi/2
 	else:
-		goal_theta = theta - math.atan(goal_y/goal_x) 
+		goal_theta = math.atan2(localy, localx) - theta
+		print "turn towards", math.atan2(localy, localx)
+
 	return goal_theta
 
-def ChooseDriveDistance (goal_waypoint, x, y, theta):
-	return ((((x - goal_waypoint.x) ** 2) + ((y - goal_waypoint.y) ** 2)) ** (0.5))
+def ChooseDriveDistance (goalx, goaly, x, y, theta):
+	return ((((x - goalx) ** 2) + ((y - goaly) ** 2)) ** (0.5))
 
 def TranslateWaypoint(gridMap, point):
 
-	translatedPoint = point
+	print "translating waypoint"
+	print "origin x", gridMap.info.origin.position.x
+	print "origin y", gridMap.info.origin.position.y
+	print "oldx", point.x
+	print "oldy", point.y
 
-	translatedPoint.x = int(round((translatedPoint.x / 10) + gridMap.info.origin.position.x, 0))
-	translatedPoint.y = int(round((translatedPoint.y / 10) + gridMap.info.origin.position.y, 0))
+	newx = ((float(point.x)/ 10) + gridMap.info.origin.position.x)
+	newy = ((float(point.y) / 10) + gridMap.info.origin.position.y)
 
-	return translatedPoint
+	print "newx", newx
+	print "newy", newy
 
-# #Odometry Callback function
-# def OdometryCallback(msg):
-# 	#Current x, y, and theta
-# 	global x, y, theta
-# 	xPos = msg.pose.pose.position.x
-# 	yPos = msg.pose.pose.position.y
-# 	orientation = msg.pose.pose.orientation
-# 	quaternion = [orientation.x, orientation.y, orientation.z, orientation.w]
-# 	roll, pitch, yaw = euler_from_quaternion(quaternion)
+	return newx, newy
 
-# 	x = xPos
-# 	y = yPos
-# 	theta = yaw
+if __name__ == '__main__':
 
-# if __name__ == '__main__':
-
-# 	global x, y, theta
-
-# 	x, y, theta = 0
-
-# 	rospy.Subscriber('odom', Odometry, OdometryCallback) 
+	while (1):
+	 	startx = float(input("Enter startx: "))
+	 	starty = float(input("Enter starty: "))
+	 	goalx = float(input("Enter goalx: "))
+	 	goaly = float(input("Enter goaly: "))
+	 	starttheta = float(input("Enter starttheta: "))
+	 	goaltheta = ChooseTurnDirection(startx, starty, goalx, goaly, starttheta)
+	 	print "goaltheta", goaltheta
