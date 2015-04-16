@@ -66,24 +66,27 @@ def DriveStraight(speed, distance):
 
 	global x, y, stop
 	tol = .1
-	acc = 0
 
 	xGoal = x + distance * math.cos(theta)
 	yGoal = y + distance * math.sin(theta)
 
-	while ((x < xGoal - tol or x > xGoal + tol) or (y < yGoal - tol or y > yGoal + tol) or (stop == 1)):
-		acc += .1
-		if (acc > 1):
-			acc = 1
-		PublishTwist(speed * acc, 0)
-		time.sleep(.1)
+	startx = x
+	starty = y
+	localx = 0
+	localy = 0
+	xdistance = distance * math.cos(theta)
+	ydistance = distance * math.sin(theta)
 
-	while ((acc != 0) or stop == 1):
-		acc -= .1
-		if (acc < 0):
-			acc = 0
-		PublishTwist(speed * acc, 0)
+	while ((x < xGoal - tol or x > xGoal + tol) or (y < yGoal - tol or y > yGoal + tol) or (stop == 1)):
+		PublishTwist(speed, 0)
 		time.sleep(.1)
+		localx = x - startx
+		localy = y - starty
+		if (abs(localx) >= xdistance or localy >= ydistance):
+			break
+
+
+
 
 	print "Drove straight"
 	PublishTwist(0, 0)
