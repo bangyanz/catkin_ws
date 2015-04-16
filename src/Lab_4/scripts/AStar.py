@@ -56,10 +56,6 @@ def IsSame (a, b):
 def GetNeighbors (a, gridMap):
 	neighbors = []
 	#north
-	print GetData(a.x, a.y + 1, gridMap)
-	print GetData(a.x + 1, a.y, gridMap)
-	print GetData(a.x, a.y - 1, gridMap)
-	print GetData(a.x - 1, a.y, gridMap)
 	if (GetData(a.x, a.y + 1, gridMap) == 0):
 		neighbors.append(Point(a.x, a.y + 1, 0))
 	#east
@@ -76,30 +72,22 @@ def GetNeighbors (a, gridMap):
 
 def GetPath (gridMap, start, goal):
 	pathPublisher = rospy.Publisher('path', GridCells) 
-	#pa = []
-	#pa.append(Point(1, 1, 0))
-	#blankPath = MakeGridCellsFromList (pa)
-	#pathPublisher.publish(blankPath)
-	#time.sleep(1)
 
 	translatedStart, translatedGoal = translatePoints(gridMap, start, goal)
 
 	parents, costs, currentNode = SearchForGoal(gridMap, start, goal)
 	path = Path()
 	poseStampedList = []
-	#path.poses = [PoseStamped()]
 	currentIndex = 0
 	pathList = []
 
 	print "getting path"
 	while not IsSame(currentNode, translatedStart):
-		#path.poses[currentIndex].pose.position = currentNode
 		print currentNode
 		pathList.append(currentNode)
 		currentNode = parents[currentNode]
 		currentIndex += 1
 
-	#path.poses[currentIndex].pose.position = start
 	pathList.append(translatedStart)
 
 	publishablePath = MakeGridCellsFromList(pathList)
@@ -141,7 +129,6 @@ def Waypoints (pointList):
 					WaypointCells.append(current_point)
 					publishableWaypoints = MakeGridCellsFromList(WaypointCells)
 					waypointpub.publish(publishableWaypoints)
-					time.sleep(.2)
 
 				current_state = 0	
 				
@@ -151,7 +138,6 @@ def Waypoints (pointList):
 					WaypointCells.append(current_point)
 					publishableWaypoints = MakeGridCellsFromList(WaypointCells)
 					waypointpub.publish(publishableWaypoints)
-					time.sleep(.2)
 				current_state = 1
 				
 			else:
@@ -163,7 +149,6 @@ def Waypoints (pointList):
 
 	publishableWaypoints = MakeGridCellsFromList(WaypointCells)
 	waypointpub.publish(publishableWaypoints)
-	time.sleep(.5)
 
 	print WaypointCells
 
@@ -176,7 +161,6 @@ def translatePoints(gridMap, start, goal):
 
 	translatedStart.x = int(round((translatedStart.x - gridMap.info.origin.position.x) * 10))
 	translatedStart.y = int(round((translatedStart.y - gridMap.info.origin.position.y) * 10))
-
 
 	translatedGoal.x = int(round((translatedGoal.x - gridMap.info.origin.position.x) * 10))
 	translatedGoal.y = int(round((translatedGoal.y - gridMap.info.origin.position.y) * 10))
@@ -211,7 +195,6 @@ def SearchForGoal (gridMap, start, goal):
 	success = 0
 
 	while not frontier.empty():
-		time.sleep(.03)
 		
 		#get from frontier and update lists
 		p, currentNode = frontier.get()

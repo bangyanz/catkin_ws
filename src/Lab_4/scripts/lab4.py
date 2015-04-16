@@ -102,7 +102,6 @@ def Rotate(angleOfRotation):
 
 	closertol = math.pi / 256
 	
-	time.sleep(.5)
 	angleGoal = (theta + angleOfRotation) 
 
 	if (angleGoal > math.pi):
@@ -193,7 +192,6 @@ if __name__ == '__main__':
 		start.y = y
 		print "start", x, y
 		print "goal", goal.x, goal.y
-		time.sleep(1)
 		stop = 0
 		try:
 			path = AStar.GetPath(expandedMap, start, goal)

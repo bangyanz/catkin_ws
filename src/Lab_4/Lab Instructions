@@ -1,0 +1,21 @@
+Lab 4 Instructions
+
+Before All Operations
+Properly configure rviz and gazebo (if running in simulation)
+Properly configure the turtlebot or local host
+Start gmapping by running $ roslaunch turtlebot_navigation gmapping_demo.launch
+
+Running Obstacle Expansion
+	1.) Host a map server by running $ rosrun map_server map_server <your map here>
+	2.) Run Obstacle Expansion by running $ python ObstacleExpansion.py
+	3.) Obstacle expansion publishes two maps to /lowResMap and /expandedMap
+
+Running Lab4*
+	1.) Map environment in Gazebo or on Turtlebot
+	2.) If needed, reorient robot using 2D Pose Estimate
+	3.) Remap the topic for 2D Nav Goal to /move_base_simple/goal2
+	4.) Wait for the terminal to print "waiting" repeatedly
+	5.) Choose a goal using the 2D Nav Goal button
+	6.) Enjoy
+
+	* This section does not work all the time.
