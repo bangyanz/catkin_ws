@@ -12,6 +12,7 @@ from geometry_msgs.msg import Twist
 from geometry_msgs.msg import Point
 from geometry_msgs.msg import PoseStamped
 from nav_msgs.msg import Odometry
+from nav_msgs.msg import GridCells
 from nav_msgs.msg import OccupancyGrid
 
 import time
@@ -158,6 +159,9 @@ def Rotate(angleOfRotation):
 	print "Rotated"
 	PublishTwist(0, 0)
 
+
+
+
 if __name__ == '__main__':
 
 	global mapReady, occupancyGrid, goalReady, goal, x, y, theta, twistPublisher, wheelRadius, robotRadius, odom_list, bumper, stop
@@ -199,6 +203,7 @@ if __name__ == '__main__':
 
 	start = Point()
 	start.z = 0
+	newPointList = []
 
 	while not mapReady:
 		time.sleep(.3)
@@ -223,6 +228,9 @@ if __name__ == '__main__':
 			waypoints = AStar.Waypoints(path)
 			for i in range (1, len(waypoints)):
 				newx, newy = waypoint_math.TranslateWaypoint(expandedMap, waypoints[i])
+				newPointList = [Point(newx, newy, 0)]
+				newCellPublisher = rospy.Publisher("newCells", GridCells)
+				newCellPublisher.publish(AStar.MakeGridCellsFromList(expandedMap, newPointList))
 				turnAngle = waypoint_math.ChooseTurnDirection(newx, newy, x, y, theta)
 				print turnAngle
 				Rotate(turnAngle)
