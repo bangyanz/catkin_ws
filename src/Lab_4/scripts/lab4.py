@@ -44,17 +44,17 @@ def GoalCallback(goalPoint):
 
 #Odometry Callback function
 
-def timerCallback(event):
+def TimerCallback(event):
 	global x, y, theta
 	
+
 	try:
 		(trans,orientation) = odom_list.lookupTransform('map', 'base_footprint', rospy.Time(0))
-		quaternion = [orientation.x, orientation.y, orientation.z, orientation.w]
+		quaternion = [orientation[0], orientation[1], orientation[2], orientation[3]]
 		roll, pitch, yaw = euler_from_quaternion(quaternion)
 		x = trans[0]
 		y = trans[1]
 		theta = yaw
-		print x, y, theta
 	except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
 		pass
 
@@ -104,7 +104,7 @@ def DriveStraight(speed, distance):
 		time.sleep(.1)
 		localx = x - startx
 		localy = y - starty
-		if (abs(localx) >= xdistance or localy >= ydistance):
+		if (abs(localx) >= xdistance*3 or abs(localy) >= ydistance*3):
 			break
 
 	print "Drove straight"
@@ -185,7 +185,7 @@ if __name__ == '__main__':
 	bumper = 0
 
 	rospy.Subscriber('map', OccupancyGrid, MapCallback)
-	rospy.Subscriber('odom', Odometry, OdometryCallback) 
+	#rospy.Subscriber('odom', Odometry, OdometryCallback) 
 	#rospy.Subscriber('map_metadata', MapMetaData, MapMetaCallback)
 	rospy.Subscriber('move_base_simple/goal2', PoseStamped, GoalCallback)
 	#rospy.Subscriber('initialpose', PoseWithCovarianceStamped, InitialPoseCallback)
@@ -195,9 +195,9 @@ if __name__ == '__main__':
 
 	odom_list = tf.TransformListener()
 
-	rospy.sleep(rospy.Duration(1, 0))
+	rospy.Timer(rospy.Duration(.01), TimerCallback)
 
-	rospy.Timer(rospy.Duration(.01), timerCallback)
+	rospy.sleep(1)
 
 	print "Starting Lab 4"
 
