@@ -171,8 +171,8 @@ def Waypoints (pointList):
 
 def translatePoints(gridMap, start, goal):
 
-	translatedStart = start
-	translatedGoal = goal
+	translatedStart = Point(start.x, start,y, 0)
+	translatedGoal = Point(goal.x, goal,y, 0)
 
 	translatedStart.x = int(round((translatedStart.x - gridMap.info.origin.position.x) * 10))
 	translatedStart.y = int(round((translatedStart.y - gridMap.info.origin.position.y) * 10))
