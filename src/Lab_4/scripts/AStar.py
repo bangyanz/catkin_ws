@@ -45,11 +45,11 @@ def GetData (x, y, gridMap):
 	if (x < 0 or x > width or y < 0 or y > height):
 		return 1
 	dataLocation = (width * y) + x
-	print width
-	print height
-	print x
-	print y
-	print dataLocation
+	#print width
+	#print height
+	#print x
+	#print y
+	#print dataLocation
 	return gridMap.data[dataLocation]
 
 def GetHeuristic (a, b):
@@ -88,7 +88,7 @@ def GetPath (gridMap, start, goal):
 
 	print "getting path"
 	while not IsSame(currentNode, translatedStart):
-		print currentNode
+		#print currentNode
 		pathList.append(currentNode)
 		currentNode = parents[currentNode]
 		currentIndex += 1
@@ -110,10 +110,10 @@ def MakeGridCellsFromList (gridMap, cellList):
 		x = ((float(cellList[i].x)/ 10) + gridMap.info.origin.position.x)
 		y = ((float(cellList[i].y)/ 10) + gridMap.info.origin.position.y)
 		newList.append(Point(x, y, 0))
-		print cellList[i].x
-		print cellList[i].y
-		print x
-		print y
+		#print cellList[i].x
+		#print cellList[i].y
+		#print x
+		#print y
 		#time.sleep(1)
 	gridCells.cells = newList
 	gridCells.header.frame_id = 'map'
@@ -165,7 +165,7 @@ def Waypoints (pointList):
 	#publishableWaypoints = MakeGridCellsFromList(WaypointCells)
 	#waypointpub.publish(publishableWaypoints)
 
-	print WaypointCells
+	#print WaypointCells
 
 	return WaypointCells
 
@@ -214,7 +214,7 @@ def SearchForGoal (gridMap, start, goal):
 		#get from frontier and update lists
 		p, currentNode = frontier.get()
 		if currentNode not in visited:
-			print currentNode
+			#print currentNode
 			frontierList.remove(currentNode)
 			visited.append(currentNode)
 
@@ -245,6 +245,12 @@ def SearchForGoal (gridMap, start, goal):
 					parents[neighbor] = currentNode
 	
 	if success:
+		publishableFrontier = MakeGridCellsFromList(gridMap, frontierList)
+		frontierPublisher.publish(publishableFrontier)
+		publishableVisited = MakeGridCellsFromList(gridMap, visited)
+		visitedPublisher.publish(publishableVisited)
+		print "publishing things"
+		time.sleep(1)
 		return parents, costs, currentNode
 	else:
 		raise NoPathError("There is no path!")
