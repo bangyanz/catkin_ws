@@ -138,8 +138,8 @@ def Rotate(angleOfRotation):
 
 		time.sleep(.1)
 
-		print "I am at", theta
-		print "goalRotate", angleGoal
+		#print "I am at", theta
+		#print "goalRotate", angleGoal
 
 	while (theta < angleGoal - closertol or theta > angleGoal + closertol):
 		if (angleOfRotation < 0):
@@ -153,8 +153,8 @@ def Rotate(angleOfRotation):
 		print theta
 
 		time.sleep(.05)
-		print "I am at", theta
-		print "goalRotate precision", angleGoal 
+		#print "I am at", theta
+		#print "goalRotate precision", angleGoal 
 
 	print "Rotated"
 	PublishTwist(0, 0)
