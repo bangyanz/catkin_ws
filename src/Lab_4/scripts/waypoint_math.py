@@ -30,17 +30,17 @@ def ChooseDriveDistance (goalx, goaly, x, y, theta):
 
 def TranslateWaypoint(gridMap, point):
 
-	print "translating waypoint"
-	print "origin x", gridMap.info.origin.position.x
-	print "origin y", gridMap.info.origin.position.y
-	print "oldx", point.x
-	print "oldy", point.y
+	#print "translating waypoint"
+	#print "origin x", gridMap.info.origin.position.x
+	#print "origin y", gridMap.info.origin.position.y
+	#print "oldx", point.x
+	#print "oldy", point.y
 
 	newx = ((float(point.x)/ 10) + gridMap.info.origin.position.x)
 	newy = ((float(point.y) / 10) + gridMap.info.origin.position.y)
 
-	print "newx", newx
-	print "newy", newy
+	#print "newx", newx
+	#print "newy", newy
 
 	return newx, newy
 
