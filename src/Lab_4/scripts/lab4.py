@@ -104,8 +104,8 @@ def DriveStraight(speed, distance):
 		time.sleep(.1)
 		localx = x - startx
 		localy = y - starty
-		if (abs(localx) >= xdistance*3 or abs(localy) >= ydistance*3):
-			break
+		#if (abs(localx) >= xdistance*3 or abs(localy) >= ydistance*3):
+			#break
 
 	print "Drove straight"
 	PublishTwist(0, 0)
@@ -134,7 +134,6 @@ def Rotate(angleOfRotation):
 			PublishTwist(0, math.pi / -4)
 		else:
 			PublishTwist(0, math.pi / 4)
-		print theta
 
 		time.sleep(.1)
 
@@ -150,7 +149,6 @@ def Rotate(angleOfRotation):
 			PublishTwist(0, math.pi / 12)
 			if (theta > angleGoal - closertol):
 				break
-		print theta
 
 		time.sleep(.05)
 		#print "I am at", theta
@@ -158,6 +156,32 @@ def Rotate(angleOfRotation):
 
 	print "Rotated"
 	PublishTwist(0, 0)
+
+def RotateExplore():
+	#rotate 45 degrees
+	#wait
+	#repeat like 16 times
+	i = 0
+	while i < 16
+		Rotate(math.pi/4)
+		time.sleep(.5)
+		i += 1
+
+def ExplorationThing(expandedMap, x, y):
+	#receive map and current position
+	#decide where closest AStarable location is
+	#if not AStarable, put in time out
+	#pass to do the things
+	explorationStart = Point(x, y, 0)
+
+
+def DoTheThings(exploreGoal):
+	#receive a goal (from exploration thing/AStar confirmed)
+	#publish the goal
+	explorePublisher = rospy.Publisher("/move_base_simple/goal", Point)
+
+	explorePublisher(exploreGoal)
+
 
 
 
@@ -230,6 +254,7 @@ if __name__ == '__main__':
 				newx, newy = waypoint_math.TranslateWaypoint(expandedMap, waypoints[i])
 				newPointList = [Point(newx, newy, 0)]
 				newCellPublisher = rospy.Publisher("newCells", GridCells)
+				print "new x and y", newx, newy
 				newCellPublisher.publish(AStar.MakeGridCellsFromList(expandedMap, newPointList))
 				turnAngle = waypoint_math.ChooseTurnDirection(newx, newy, x, y, theta)
 				print turnAngle

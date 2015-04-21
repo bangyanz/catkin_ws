@@ -65,3 +65,12 @@ roslaunch turtlebot_rviz_launchers view_navigation.launch
 roslaunch turtlebot_teleop keyboard_teleop.launch --screen
 
 SUBSCRIBE NAVGOAL TO GOAL2
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Things to figure out
+
+* How to run Gmapping and AMCL at the same time
+
+* Potentially how to just send AMCL the start point, the map, and the goal, and give it the updated odometry and have it navigate like that?

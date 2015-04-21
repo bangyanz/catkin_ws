@@ -45,11 +45,11 @@ def GetData (x, y, gridMap):
 	if (x < 0 or x > width or y < 0 or y > height):
 		return 1
 	dataLocation = (width * y) + x
-	#print width
-	#print height
-	#print x
-	#print y
-	#print dataLocation
+	#print "width", width
+	#print "height", height
+	#print "x", x
+	#print "y", y
+	#print "dataLocation", dataLocation
 	return gridMap.data[dataLocation]
 
 def GetHeuristic (a, b):
@@ -80,7 +80,7 @@ def GetPath (gridMap, start, goal):
 
 	translatedStart, translatedGoal = translatePoints(gridMap, start, goal)
 
-	parents, costs, currentNode = SearchForGoal(gridMap, start, goal)
+	parents, costs, currentNode = SearchForGoal(gridMap, translatedStart, translatedGoal)
 	path = Path()
 	poseStampedList = []
 	currentIndex = 0
@@ -171,8 +171,8 @@ def Waypoints (pointList):
 
 def translatePoints(gridMap, start, goal):
 
-	translatedStart = Point(start.x, start,y, 0)
-	translatedGoal = Point(goal.x, goal,y, 0)
+	translatedStart = Point(start.x, start.y, 0)
+	translatedGoal = Point(goal.x, goal.y, 0)
 
 	translatedStart.x = int(round((translatedStart.x - gridMap.info.origin.position.x) * 10))
 	translatedStart.y = int(round((translatedStart.y - gridMap.info.origin.position.y) * 10))
