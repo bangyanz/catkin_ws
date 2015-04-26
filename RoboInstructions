@@ -74,3 +74,17 @@ Things to figure out
 * How to run Gmapping and AMCL at the same time
 
 * Potentially how to just send AMCL the start point, the map, and the goal, and give it the updated odometry and have it navigate like that?
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+links
+
+http://wiki.ros.org/nav2d
+
+http://answers.ros.org/question/207001/nav2d-call-getmap-service-failed/
+
+http://answers.ros.org/questions/scope:all/sort:activity-desc/tags:nav2d/page:1/
+
+http://answers.ros.org/question/188209/nav2d-and-turtlebot/
+
+http://wiki.ros.org/nav2d/Tutorials/RobotOperator
