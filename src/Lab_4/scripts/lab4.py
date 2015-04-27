@@ -162,7 +162,7 @@ def RotateExplore():
 	#wait
 	#repeat like 16 times
 	i = 0
-	while i < 16
+	while i < 16:
 		Rotate(math.pi/4)
 		time.sleep(.5)
 		i += 1
