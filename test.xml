@@ -32,10 +32,10 @@
 	</node>
 
 	<!-- Start Mapper to genreate map from laser scans -->
-	<node name="Mapper" pkg="nav2d_karto" type="mapper">
+	<!--node name="Mapper" pkg="nav2d_karto" type="mapper">
 		<remap from="scan" to="base_scan"/>
 		<rosparam file="$(find nav2d_tutorials)/param/mapper.yaml"/>
-	</node>
+	</node-->
 
 	<!-- Start the Navigator to move the robot autonomously -->
 	<node name="Navigator" pkg="nav2d_navigator" type="navigator">
