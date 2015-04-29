@@ -7,12 +7,12 @@
 	<param name="use_sim_time" value="true" />
 	<rosparam file="$(find nav2d_tutorials)/param/ros.yaml"/>
 
-	<node pkg="stage_ros" type="stageros" name="stageros" args="$(find nav2d_tutorials)/world/tutorial.world">
+	<!--node pkg="stage_ros" type="stageros" name="stageros" args="$(find nav2d_tutorials)/world/tutorial.world">
 		<param name="base_watchdog_timeout" value="0.5"/>
 		<remap from="odom" to="odom"/>
 		<remap from="base_pose_ground_truth" to="base_pose_ground_truth"/>
 		<remap from="scan" to="base_scan"/>
-	</node>
+	</node-->
 
 	<!--  ***************** Robot Model *****************  -->
 	<!--include file="$(find turtlebot_bringup)/launch/includes/robot.launch.xml">
