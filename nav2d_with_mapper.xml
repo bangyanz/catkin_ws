@@ -7,12 +7,12 @@
 	<param name="use_sim_time" value="true" />
 	<rosparam file="$(find nav2d_tutorials)/param/ros.yaml"/>
 
-	<node pkg="stage_ros" type="stageros" name="stageros" args="$(find nav2d_tutorials)/world/tutorial.world">
+	<!--node pkg="stage_ros" type="stageros" name="stageros" args="$(find nav2d_tutorials)/world/tutorial.world">
 		<param name="base_watchdog_timeout" value="0.5"/>
 		<remap from="odom" to="odom"/>
 		<remap from="base_pose_ground_truth" to="base_pose_ground_truth"/>
 		<remap from="scan" to="base_scan"/>
-	</node>
+	</node--s>
 
 	<!--  ***************** Robot Model *****************  -->
 	<include file="$(find turtlebot_bringup)/launch/includes/robot.launch.xml">
@@ -24,7 +24,7 @@
 		<param name="use_gui" value="true"/>
 	</node>
 
-
+	<node pkg="tf" type="static_transform_publisher" name="laser_broadcaster" args="0 0 0 0 0 0 0 camera_depth_frame base_laser_link 100"/>
 
 	<!-- Start the Operator to control the real robot -->
 	<node name="Operator" pkg="nav2d_operator" type="operator" >
@@ -51,5 +51,7 @@
 
 	<!-- RVIZ to view the visualization -->
 	<node name="RVIZ" pkg="rviz" type="rviz" args=" -d $(find nav2d_tutorials)/param/tutorial3.rviz" />
+
+	<include file="$(find turtlebot_navigation)/launch/includes/move_base.launch.xml"/>
 
 </launch>
